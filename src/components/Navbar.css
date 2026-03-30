@@ -1,0 +1,145 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 120px;
+  height: 72px;
+  background: #0e0e0e;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+/* Logo */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar__logo-img {
+  height: 32px;
+  width: auto;
+}
+
+.navbar__logo-text {
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 3px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.navbar__logo-icon {
+  width: 30px;
+  height: 22px;
+}
+
+/* Nav links */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__link {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #aaa;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.navbar__link:hover {
+  color: #00A7E5;
+}
+
+/* Right side */
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.navbar__lang {
+  background: none;
+  border: none;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #555;
+  cursor: pointer;
+  padding: 0;
+}
+
+.navbar__lang .active {
+  color: #fff;
+}
+
+.navbar__login {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #aaa;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.navbar__login:hover {
+  color: #fff;
+}
+
+.navbar__cta {
+  display: inline-flex;
+  align-items: center;
+  background: #00A7E5;
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0 22px;
+  height: 44px;
+  border-radius: 0;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.navbar__cta:hover {
+  background: #0095CC;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .navbar__links {
+    gap: 16px;
+  }
+  .navbar__link {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 20px;
+  }
+  .navbar__links {
+    display: none;
+  }
+}
