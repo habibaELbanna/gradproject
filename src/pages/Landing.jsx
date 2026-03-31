@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
+import Comparison from '../components/Comparison';
 
 export default function Landing() {
   const [lang, setLang] = useState('en');
@@ -15,6 +16,7 @@ export default function Landing() {
       <Navbar lang={lang} onLangToggle={handleLangToggle} />
       <Hero />
       <About />
+      <Comparison />
     </div>
   );
 }
