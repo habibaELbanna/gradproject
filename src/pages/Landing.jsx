@@ -3,6 +3,9 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import Comparison from '../components/Comparison';
+import Testimonials from '../components/Testimonials';
+import bg from '../Assets/background.svg';
+import './Landing.css';
 
 export default function Landing() {
   const [lang, setLang] = useState('en');
@@ -12,11 +15,15 @@ export default function Landing() {
   };
 
   return (
-    <div style={{ background: '#0e0e0e', minHeight: '100vh' }}>
+    <div style={{ background: '#0e0e0e', minHeight: '100vh', overflowX: 'hidden' }}>
       <Navbar lang={lang} onLangToggle={handleLangToggle} />
       <Hero />
       <About />
-      <Comparison />
+      <div className="landing__bg-wrap">
+        <img src={bg} alt="" className="landing__bg" />
+        <Comparison />
+        <Testimonials />
+      </div>
     </div>
   );
 }

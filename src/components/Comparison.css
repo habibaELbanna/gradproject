@@ -1,20 +1,9 @@
 .comparison {
   position: relative;
-  background: #0e0e0e;
+  background: transparent;
   padding: 120px 120px;
-  overflow: visible;
-}
-
-.comparison__bg {
-  position: absolute;
-  top: 90%;
-  left: 60%;
-  transform: translate(-50%, -50%);
-  width: 140%;
-  height: auto;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 1;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .comparison__label-wrap {

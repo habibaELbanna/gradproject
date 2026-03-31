@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import SectionLabel from './Sectionlabel';
-import bg from '../Assets/background.svg';
 import './Comparison.css';
 
 const ROWS = [
@@ -36,8 +35,6 @@ export default function Comparison() {
 
   return (
     <section className="comparison">
-      <img src={bg} alt="" className="comparison__bg" />
-
       <div className="comparison__label-wrap">
         <SectionLabel title="Why SELA" number="002" />
       </div>
