@@ -20,7 +20,7 @@
   --success:      #10B981;
   --warning:      #FFA500;
   --error:        #EF4444;
-  --radius:       0; /* sharp corners everywhere */
+  --radius:       0; 
 }
 
 html {

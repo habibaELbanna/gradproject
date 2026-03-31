@@ -4,15 +4,13 @@ import Hero from '../components/Hero';
 import About from '../components/About';
 import Comparison from '../components/Comparison';
 import Testimonials from '../components/Testimonials';
+import Features from '../components/Features';
 import bg from '../Assets/background.svg';
 import './Landing.css';
 
 export default function Landing() {
   const [lang, setLang] = useState('en');
-
-  const handleLangToggle = () => {
-    setLang((prev) => (prev === 'en' ? 'ar' : 'en'));
-  };
+  const handleLangToggle = () => setLang(prev => prev === 'en' ? 'ar' : 'en');
 
   return (
     <div style={{ background: '#0e0e0e', minHeight: '100vh', overflowX: 'hidden' }}>
@@ -24,6 +22,7 @@ export default function Landing() {
         <Comparison />
         <Testimonials />
       </div>
+      <Features />
     </div>
   );
 }
