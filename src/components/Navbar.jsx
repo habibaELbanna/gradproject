@@ -1,43 +1,53 @@
+import { useTranslation } from 'react-i18next';
 import logo from '../Assets/logorad.svg';
 import './Navbar.css';
 
 const NAV_LINKS = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Pricing', to: '/pricing' },
-  { label: 'Features', to: '/features' },
-  { label: 'How It Works', to: '/how-it-works' },
-  { label: 'Contact', to: '/contact' },
-  { label: 'Learn & Grow', to: '/learn' },
-  { label: 'Tips', to: '/tips' },
+  { key: 'nav_home', to: '/' },
+  { key: 'nav_about', to: '/about' },
+  { key: 'nav_pricing', to: '/pricing' },
+  { key: 'nav_features', to: '/features' },
+  { key: 'nav_how', to: '/how-it-works' },
+  { key: 'nav_contact', to: '/contact' },
+  { key: 'nav_learn', to: '/learn' },
+  { key: 'nav_tips', to: '/tips' },
 ];
 
-export default function Navbar({ lang = 'en', onLangToggle }) {
-  return (
-    <nav className="navbar">
-      <a href="/" className="navbar__logo">
-        <img src={logo} alt="SELA" className="navbar__logo-img" />
-      </a>
+export default function Navbar() {
+  const { t, i18n } = useTranslation();
 
-      <ul className="navbar__links">
+  const toggleLang = () => {
+    const next = i18n.language === 'en' ? 'ar' : 'en';
+    i18n.changeLanguage(next);
+    document.documentElement.dir = next === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = next;
+  };
+
+  return (
+    <div className="navbar_container">
+      <div className="nav_logo_img">
+        <a href="/"><img src={logo} alt="SELA" style={{ height: '100%', width: 'auto' }} /></a>
+      </div>
+
+      <ul className="nav_links_list">
         {NAV_LINKS.map((link) => (
-          <li key={link.to}>
-            <a href={link.to} className="navbar__link">
-              {link.label}
-            </a>
+          <li key={link.key}>
+            <a href={link.to}>{t(link.key)}</a>
           </li>
         ))}
       </ul>
 
-      <div className="navbar__right">
-        <button className="navbar__lang" onClick={onLangToggle}>
-          <span className={lang === 'en' ? 'active' : ''}>EN</span>
-          {' / '}
-          <span className={lang === 'ar' ? 'active' : ''}>AR</span>
-        </button>
-        <a href="/login" className="navbar__login">Login</a>
-        <a href="/signup" className="navbar__cta">Get Started →</a>
+      <div className="nav_right_section">
+        <div className="nav_lang_btn" onClick={toggleLang}>
+          <span className={i18n.language === 'en' ? 'active_lang' : ''}
+            style={{ cursor: 'pointer' }}>EN</span>
+          <span className="lang_separator">/</span>
+          <span className={i18n.language === 'ar' ? 'active_lang' : ''}
+            style={{ cursor: 'pointer' }}>AR</span>
+        </div>
+        <a href="/login"><button className="nav_login_btn">{t('login')}</button></a>
+        <a href="/signup"><button className="nav_cta_btn">{t('get_started')}</button></a>
       </div>
-    </nav>
+    </div>
   );
 }

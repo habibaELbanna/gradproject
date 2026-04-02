@@ -204,6 +204,20 @@
   border-right: 1px solid #222;
   opacity: 0;
 }
+[dir="rtl"] .hero__phase {
+  left: auto;
+  right: 120px;
+}
+
+[dir="rtl"] .hero__sub {
+  left: auto;
+  right: 120px;
+}
+
+[dir="rtl"] .hero__bird {
+  right: auto;
+  left: 2%;
+}
 
 .hero__stat:last-child {
   border-right: none;

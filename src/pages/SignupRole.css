@@ -1,0 +1,184 @@
+.signup-container {
+  min-height: 100vh;
+  background-color: #050505;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+}
+
+/* Header & Progress */
+.signup-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+}
+
+.nav-logo {
+  height: 32px;
+  cursor: pointer;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.step-text {
+  color: #00adef;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dots-gap {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #333;
+}
+
+.dot.active {
+  background-color: #00adef;
+  box-shadow: 0 0 10px #00adef;
+}
+
+/* Main Content */
+.signup-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+.title-section {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title-section h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.title-section p {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+/* Cards Grid */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.role-card {
+  background-color: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 16px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: border-color 0.3s ease;
+}
+
+.role-card:hover {
+  border-color: #333;
+}
+
+.icon-wrapper {
+  background-color: #0f172a;
+  padding: 1.5rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  color: #00adef;
+}
+
+.role-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.role-card p {
+  color: #666;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 250px;
+}
+
+.select-btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: #00adef;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.select-btn:hover {
+  background-color: #00cfef;
+}
+
+/* Footer */
+.signup-footer {
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.login-prompt {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.login-link {
+  color: #00adef;
+  background: none;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(0, 173, 239, 0.7);
+  border-top: 1px solid #1a1a1a;
+  padding-top: 1.5rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-links a:hover {
+  color: white;
+}
