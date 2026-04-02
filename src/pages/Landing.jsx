@@ -6,7 +6,7 @@ import Comparison from '../components/Comparison';
 import Testimonials from '../components/Testimonials';
 import Features from '../components/Features';
 import HowItWorks from '../components/Howitworks';
-import LearnGrow from '../components/LearnGrow';
+import LearnGrow from '../components/Learngrow';
 import bg from '../Assets/background.svg';
 import './Landing.css';
 
