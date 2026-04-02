@@ -9,6 +9,7 @@ import HowItWorks from '../components/Howitworks';
 import LearnGrow from '../components/Learngrow';
 import Tips from '../components/Tips';
 import Statistics from '../components/Statistics';
+import Pricing from '../components/Pricing';
 import bg from '../Assets/background.svg';
 import './Landing.css';
 
@@ -31,6 +32,7 @@ export default function Landing() {
       <LearnGrow />
       <Tips />
       <Statistics />
+      <Pricing />
     </div>
   );
 }
