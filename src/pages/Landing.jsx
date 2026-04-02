@@ -11,6 +11,7 @@ import Tips from '../components/Tips';
 import Statistics from '../components/Statistics';
 import Pricing from '../components/Pricing';
 import Contact from '../components/Contact';
+import FAQ from '../components/Faq';
 import bg from '../Assets/background.svg';
 import './Landing.css';
 
@@ -35,6 +36,7 @@ export default function Landing() {
       <Statistics />
       <Pricing />
       <Contact />
+      <FAQ />
     </div>
   );
 }
