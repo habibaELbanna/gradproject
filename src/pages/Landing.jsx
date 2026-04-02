@@ -8,6 +8,7 @@ import Features from '../components/Features';
 import HowItWorks from '../components/Howitworks';
 import LearnGrow from '../components/Learngrow';
 import Tips from '../components/Tips';
+import Statistics from '../components/Statistics';
 import bg from '../Assets/background.svg';
 import './Landing.css';
 
@@ -29,6 +30,7 @@ export default function Landing() {
       <HowItWorks />
       <LearnGrow />
       <Tips />
+      <Statistics />
     </div>
   );
 }
