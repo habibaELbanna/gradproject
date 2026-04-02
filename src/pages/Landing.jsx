@@ -12,6 +12,7 @@ import Statistics from '../components/Statistics';
 import Pricing from '../components/Pricing';
 import Contact from '../components/Contact';
 import FAQ from '../components/Faq';
+import CTA from '../components/Cta';
 import bg from '../Assets/background.svg';
 import './Landing.css';
 
@@ -37,6 +38,7 @@ export default function Landing() {
       <Pricing />
       <Contact />
       <FAQ />
+      <CTA />
     </div>
   );
 }
