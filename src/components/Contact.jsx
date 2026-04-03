@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { supabase } from '../supabaseClient';
 import SectionLabel from './Sectionlabel';
 import './Contact.css';
 
 export default function Contact() {
+  const { t } = useTranslation();
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -17,21 +21,35 @@ export default function Contact() {
   }, []);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => { e.preventDefault(); };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.message) return;
+    setStatus('loading');
+    const { error } = await supabase
+      .from('contact_messages')
+      .insert([{ name: form.name, email: form.email, message: form.message }]);
+    if (error) {
+      setStatus('error');
+    } else {
+      setStatus('success');
+      setForm({ name: '', email: '', message: '' });
+    }
+  };
 
   return (
     <section className="contact" ref={ref}>
       <div className="contact__label-wrap">
-        <SectionLabel title="Contact" number="010" />
+        <SectionLabel title={t('cont_label')} number="010" />
       </div>
 
       <h2 className={`contact__title${visible ? ' contact__title--visible' : ''}`}>
-        Have Questions?<br />We're Here to Help
+        {t('cont_title')}<br />{t('cont_title_2')}
       </h2>
 
       <div className="contact__body">
         <div className={`contact__left${visible ? ' contact__left--visible' : ''}`}>
-          <h3 className="contact__subtitle">Get in Touch</h3>
+          <h3 className="contact__subtitle">{t('cont_subtitle')}</h3>
           <div className="contact__info-list">
             <div className="contact__info-item">
               <div className="contact__info-icon">
@@ -41,7 +59,7 @@ export default function Contact() {
                 </svg>
               </div>
               <div>
-                <div className="contact__info-label">Email</div>
+                <div className="contact__info-label">{t('cont_email')}</div>
                 <div className="contact__info-value">support@sela.com.eg</div>
               </div>
             </div>
@@ -52,7 +70,7 @@ export default function Contact() {
                 </svg>
               </div>
               <div>
-                <div className="contact__info-label">Phone</div>
+                <div className="contact__info-label">{t('cont_phone')}</div>
                 <div className="contact__info-value">+20 2 1234 5678</div>
               </div>
             </div>
@@ -64,7 +82,7 @@ export default function Contact() {
                 </svg>
               </div>
               <div>
-                <div className="contact__info-label">Address</div>
+                <div className="contact__info-label">{t('cont_addr')}</div>
                 <div className="contact__info-value">Cairo, Egypt</div>
               </div>
             </div>
@@ -76,28 +94,39 @@ export default function Contact() {
                 </svg>
               </div>
               <div>
-                <div className="contact__info-label">Hours</div>
-                <div className="contact__info-value">Sun-Thu, 9AM-6PM</div>
+                <div className="contact__info-label">{t('cont_hours')}</div>
+                <div className="contact__info-value">{t('cont_hours_val')}</div>
               </div>
             </div>
           </div>
-          <a href="/contact" className="contact__link">Visit Full Contact Page →</a>
+          <a href="/contact" className="contact__link">{t('cont_link')}</a>
         </div>
 
         <form className={`contact__form${visible ? ' contact__form--visible' : ''}`} onSubmit={handleSubmit}>
           <div className="contact__field">
-            <label className="contact__label">Name</label>
-            <input className="contact__input" type="text" name="name" placeholder="Your name" value={form.name} onChange={handleChange} />
+            <label className="contact__label">{t('form_name')}</label>
+            <input className="contact__input" type="text" name="name" placeholder={t('form_name_ph')}
+              value={form.name} onChange={handleChange} required />
           </div>
           <div className="contact__field">
-            <label className="contact__label">Email</label>
-            <input className="contact__input" type="email" name="email" placeholder="your@email.com" value={form.email} onChange={handleChange} />
+            <label className="contact__label">{t('form_email')}</label>
+            <input className="contact__input" type="email" name="email" placeholder={t('form_email_ph')}
+              value={form.email} onChange={handleChange} required />
           </div>
           <div className="contact__field">
-            <label className="contact__label">Message</label>
-            <textarea className="contact__textarea" name="message" placeholder="Your message..." value={form.message} onChange={handleChange} rows={6} />
+            <label className="contact__label">{t('form_msg')}</label>
+            <textarea className="contact__textarea" name="message" placeholder={t('form_msg_ph')}
+              value={form.message} onChange={handleChange} rows={6} required />
           </div>
-          <button type="submit" className="contact__submit">Send Message</button>
+
+          <button type="submit" className={`contact__submit${status === 'loading' ? ' contact__submit--loading' : ''}`}
+            disabled={status === 'loading'}>
+            {status === 'loading' ? '...' : status === 'success' ? '✓ Message Sent!' : t('form_send')}
+          </button>
+
+          {status === 'error' && (
+            <p className="contact__error">Something went wrong. Please try again.</p>
+          )}
         </form>
       </div>
     </section>

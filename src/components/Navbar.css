@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 4rem;
+  padding: 1rem 120px;
   background-color: #0e0e0e;
   border-bottom: 1px solid #1a1a1a;
   position: sticky;
@@ -13,32 +13,40 @@
 .nav_logo_img {
   height: 35px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .nav_links_list {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: 1.5rem;
   margin: 0;
   padding: 0;
 }
 
 .nav_links_list a {
-  color: white;
+  color: #aaa;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: color 0.3s;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.2s;
 }
 
 .nav_links_list a:hover {
-  color: #00adef;
+  color: #00A7E5;
+}
+
+.nav_mobile_actions {
+  display: none;
 }
 
 .nav_right_section {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  flex-shrink: 0;
 }
 
 .nav_lang_btn {
@@ -47,45 +55,158 @@
   color: #555;
   font-weight: bold;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .active_lang {
-  color: white;
+  color: #fff;
 }
 
 .lang_separator {
-  margin: 0 4px;
+  color: #444;
 }
 
 .nav_login_btn {
-  background: #222;
-  color: white;
-  border: 1px solid #444;
-  padding: 8px 20px;
-  border-radius: 4px;
+  background: transparent;
+  color: #aaa;
+  border: none;
+  padding: 0;
   cursor: pointer;
-  font-weight: bold;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav_login_btn:hover {
+  color: #fff;
 }
 
 .nav_cta_btn {
-  background: #00adef;
+  background: #00A7E5;
   color: #0e0e0e;
   border: none;
-  padding: 10px 24px;
-  border-radius: 4px;
-  font-weight: 700;
+  padding: 0 22px;
+  height: 44px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 2px;
   cursor: pointer;
   text-transform: uppercase;
-  transition: background 0.3s;
+  transition: background 0.2s;
 }
 
 .nav_cta_btn:hover {
-  background: #00cfef;
+  background: #0095CC;
 }
 
-/* RTL Support for Arabic */
-[dir="rtl"] .nav_links_list {
-  flex-direction: row;
+.nav_burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1001;
+}
+
+.nav_burger_line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav_burger_line--open:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav_burger_line--open:nth-child(2) { opacity: 0; }
+.nav_burger_line--open:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+[dir="rtl"] .navbar_container {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 1024px) {
+  .navbar_container {
+    padding: 1rem 32px;
+  }
+
+  .nav_logo_img {
+    height: 32px;
+  }
+
+  .nav_links_list {
+    gap: 1.2rem;
+  }
+
+  .nav_links_list a {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+  }
+
+  .nav_cta_btn {
+    padding: 0 18px;
+    height: 40px;
+    font-size: 11px;
+  }
+
+  .nav_lang_btn {
+    font-size: 11px;
+  }
+
+  .nav_login_btn {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar_container { padding: 1rem 24px; position: relative; }
+
+  .nav_links_list {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0e0e0e;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    z-index: 999;
+  }
+
+  .nav_links_list--open {
+    display: flex;
+  }
+
+  .nav_links_list a {
+    font-size: 18px;
+    letter-spacing: 3px;
+  }
+
+  .nav_mobile_actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .nav_right_section {
+    display: none;
+  }
+
+  .nav_burger {
+    display: flex;
+  }
 }

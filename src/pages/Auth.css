@@ -1,0 +1,345 @@
+.auth__page {
+  min-height: 100vh;
+  background: #050505;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.auth__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+}
+
+.auth__logo {
+  height: 32px;
+  cursor: pointer;
+}
+
+.auth__progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.auth__step {
+  color: #00A7E5;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.auth__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.auth__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #333;
+}
+
+.auth__dot--active {
+  background: #00A7E5;
+  box-shadow: 0 0 10px #00A7E5;
+}
+
+.auth__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+.auth__title {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.auth__subtitle {
+  color: #888;
+  font-size: 16px;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.auth__form {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.auth__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.auth__label {
+  font-size: 13px;
+  color: #ccc;
+}
+
+.auth__required {
+  color: #ff4444;
+}
+
+.auth__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.auth__input-wrap:focus-within {
+  border-color: rgba(0, 167, 229, 0.5);
+}
+
+.auth__icon {
+  color: #555;
+  margin: 0 12px;
+  flex-shrink: 0;
+}
+
+.auth__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  padding: 14px 12px 14px 0;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.auth__input::placeholder { color: #555; }
+
+.auth__select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 32px !important;
+}
+
+.auth__chevron {
+  position: absolute;
+  right: 10px;
+  color: #555;
+  pointer-events: none;
+}
+
+.auth__eye {
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+}
+
+.auth__forgot {
+  background: none;
+  border: none;
+  color: #00A7E5;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: right;
+  align-self: flex-end;
+  padding: 0;
+  margin-top: 4px;
+}
+
+.auth__btn {
+  width: 100%;
+  padding: 16px;
+  background: #00A7E5;
+  color: #0e0e0e;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.auth__btn:hover { background: #0095CC; }
+.auth__btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.auth__switch {
+  text-align: center;
+  color: #666;
+  font-size: 13px;
+}
+
+.auth__link {
+  color: #00A7E5;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth__error {
+  color: #ff4444;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Social buttons */
+.auth__social {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 24px;
+}
+
+.auth__social-btn {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 11px;
+  padding: 14px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.auth__social-btn:hover { border-color: #444; }
+
+/* Divider */
+.auth__divider {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  color: #00A7E5;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.auth__divider::before,
+.auth__divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #00A7E5;
+  opacity: 0.4;
+}
+
+/* Phone */
+.auth__phone-wrap {
+  display: flex;
+  gap: 12px;
+}
+
+.auth__phone-code { width: 120px; flex-shrink: 0; }
+.auth__phone-num { flex: 1; }
+
+/* Checkbox */
+.auth__checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  color: #888;
+  cursor: pointer;
+}
+
+.auth__checkbox input { margin-top: 2px; accent-color: #00A7E5; }
+
+/* Nav buttons */
+.auth__nav-btns {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 4rem;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.auth__back {
+  background: transparent;
+  border: 1px solid #333;
+  color: #00A7E5;
+  padding: 12px 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.auth__continue {
+  background: #00A7E5;
+  border: none;
+  color: #0e0e0e;
+  padding: 12px 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/* Footer */
+.auth__footer {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth__footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(0, 167, 229, 0.7);
+  border-top: 1px solid #1a1a1a;
+  padding-top: 1.5rem;
+}
+
+.auth__footer-links a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.auth__footer-links a:hover { color: #fff; }
+
+@media (max-width: 430px) {
+  .auth__nav { padding: 1.5rem; }
+  .auth__social { grid-template-columns: 1fr; }
+  .auth__nav-btns { padding: 1rem 1.5rem; }
+  .auth__phone-wrap { flex-direction: column; }
+  .auth__phone-code { width: 100%; }
+}
+
+[dir="rtl"] .auth__nav { flex-direction: row-reverse; }
+[dir="rtl"] .auth__progress { flex-direction: row-reverse; }
+[dir="rtl"] .auth__icon { margin: 0 12px 0 0; }
+[dir="rtl"] .auth__forgot { text-align: left; }
+[dir="rtl"] .auth__footer-links { flex-direction: row-reverse; }
+[dir="rtl"] .auth__nav-btns { flex-direction: row-reverse; }
+[dir="rtl"] .auth__checkbox { flex-direction: row-reverse; }

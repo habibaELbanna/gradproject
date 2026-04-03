@@ -121,10 +121,10 @@
   to { opacity: 1; }
 }
 
-
+/* ── Subtitle + CTA ── */
 .hero__sub {
   position: absolute;
-  top: 431px;
+  top: 510px;
   left: 120px;
   z-index: 10;
   opacity: 0;
@@ -204,20 +204,6 @@
   border-right: 1px solid #222;
   opacity: 0;
 }
-[dir="rtl"] .hero__phase {
-  left: auto;
-  right: 120px;
-}
-
-[dir="rtl"] .hero__sub {
-  left: auto;
-  right: 120px;
-}
-
-[dir="rtl"] .hero__bird {
-  right: auto;
-  left: 2%;
-}
 
 .hero__stat:last-child {
   border-right: none;
@@ -285,4 +271,53 @@
   .hero__stat {
     padding: 0 24px;
   }
+}
+
+[dir="rtl"] .hero__phase {
+  left: auto;
+  right: 120px;
+}
+
+[dir="rtl"] .hero__sub {
+  left: auto;
+  right: 120px;
+}
+
+[dir="rtl"] .hero__bird {
+  right: auto;
+  left: 2%;
+}
+
+@media (max-width: 768px) {
+  .hero__phase { left: 24px; top: 100px; }
+  .hero__sub { left: 24px; top: 380px; }
+  .hero__word { font-size: clamp(36px, 10vw, 56px); }
+  .hero__bird { width: 280px; height: 220px; right: -30px; opacity: 0.4; top: 40%; }
+  .hero__stat { padding: 0 20px; }
+  .hero__stat-num { font-size: 28px; }
+  [dir="rtl"] .hero__phase { right: 24px; }
+  [dir="rtl"] .hero__sub { right: 24px; }
+  [dir="rtl"] .hero__bird { left: -30px; right: auto; }
+}
+
+@media (max-width: 430px) {
+  .hero__phase { top: 90px; }
+  .hero__sub { top: 340px; }
+  .hero__word { font-size: clamp(30px, 9vw, 46px); }
+}
+
+@media (max-width: 430px) {
+  .hero { min-height: 100svh; overflow: hidden; }
+  .hero__phase { left: 20px; right: 20px; top: 80px; }
+  .hero__word { font-size: 36px; line-height: 1.1; }
+  .hero__sub { left: 20px; right: 20px; top: auto; bottom: 180px; }
+  .hero__desc { font-size: 13px; max-width: 100%; }
+  .hero__bird { width: 200px; height: 160px; right: -20px; top: 35%; opacity: 0.25; }
+  .hero__stats-strip { height: 140px; }
+  .hero__stat { padding: 0 12px; }
+  .hero__stat-num { font-size: 22px; }
+  .hero__stat-label { font-size: 9px; }
+  [dir="rtl"] .hero__phase { left: 20px; right: 20px; }
+  [dir="rtl"] .hero__sub { left: 20px; right: 20px; }
+  [dir="rtl"] .hero__bird { left: -20px; right: auto; }
 }

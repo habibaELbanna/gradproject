@@ -83,16 +83,34 @@
   color: #00A7E5;
 }
 
+
 @media (max-width: 1024px) {
   .stats { padding: 80px 40px; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
-  .stats__card:nth-child(2) { border-right: 1px solid rgba(0,167,229,0.2); }
-  .stats__card:nth-child(1),
-  .stats__card:nth-child(2) { border-bottom: none; }
 }
 
 @media (max-width: 768px) {
   .stats { padding: 60px 24px; }
   .stats__grid { grid-template-columns: 1fr 1fr; }
-  .stats__card { padding: 32px 24px; }
+}
+
+@media (max-width: 430px) {
+  .stats { padding: 60px 16px; }
+  .stats__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .stats__card {
+    width: 100%;
+    border: 1px solid rgba(0, 167, 229, 0.3) !important;
+    padding: 32px 24px;
+    opacity: 1;
+    transform: none;
+  }
+  .stats__card--visible {
+    animation: none;
+  }
+  .stats__number { font-size: 36px; }
+  .stats__label { font-size: 11px; }
 }
