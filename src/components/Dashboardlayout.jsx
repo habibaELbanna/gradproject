@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '../supabaseClient';
@@ -34,6 +34,20 @@ export default function DashboardLayout({ children, breadcrumb, pageTitle }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [userRole, setUserRole] = useState('buyer');
+
+  useEffect(() => {
+    async function getRole() {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single();
+          if (profile) setUserRole(profile.role);
+        }
+      } catch(e) {}
+    }
+    getRole();
+  }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -115,7 +129,7 @@ export default function DashboardLayout({ children, breadcrumb, pageTitle }) {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
               <span className="dash__icon-badge" />
             </button>
-            <button className="dash__icon-btn">
+            <button className="dash__icon-btn" onClick={() => navigate(userRole === 'vendor' ? '/vendor/profile' : '/buyer/profile')}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </button>
           </div>

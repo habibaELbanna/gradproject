@@ -155,7 +155,7 @@ function NeedsDonut() {
 const statusColor = s => ({open:'#4CAF50', closed:'#00A7E5', pending:'#FFB800', expired:'#888'}[s]||'#555');
 
 export default function BuyerAnalytics() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [period, setPeriod] = useState('30');
   const [stats, setStats] = useState({ totalSpend: 215000, activeNeeds: 8, savedAmount: 32400, avgProposals: 7.2 });
