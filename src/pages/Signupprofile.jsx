@@ -26,7 +26,7 @@ export default function SignupProfile() {
     e.preventDefault();
     setLoading(true); setError('');
 const { data: { user } } = await supabase.auth.getUser();
-if (!user) { navigate('/analytics'); return; }
+if (!user) { navigate(role === 'vendor' ? '/vendor/dashboard' : '/buyer/dashboard'); return; }
     const { error: profileError } = await supabase.from('profiles').upsert({
       id: user.id, email: user.email, full_name: form.fullName,
       role, phone: `${form.phoneCode}${form.phone}`, is_verified: false,
@@ -36,7 +36,7 @@ if (!user) { navigate('/analytics'); return; }
       owner_id: user.id, name_en: form.company, company_type: role,
     });
     if (companyError) { setError(companyError.message); setLoading(false); return; }
-    navigate(role === 'vendor' ? '/analytics' : '/buyer/analytics');
+    navigate(role === 'vendor' ? '/vendor/dashboard' : '/buyer/dashboard');
   };
 
   return (

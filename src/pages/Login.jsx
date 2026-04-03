@@ -28,8 +28,8 @@ export default function Login() {
       .select('role')
       .eq('id', data.user.id)
       .single();
-    if (profile?.role === 'vendor') navigate('/analytics');
-    else navigate('/buyer/analytics');
+    if (profile?.role === 'vendor') navigate('/vendor/dashboard');
+    else navigate('/buyer/dashboard');
   };
 
   return (
