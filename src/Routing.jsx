@@ -12,6 +12,8 @@ import BuyerDashboard from './pages/Buyerdashboard';
 import BuyerAnalytics from './pages/Buyeranalytics';
 import BuyerProfile from './pages/Buyerprofile';
 import BrowseCategories from './pages/BrowseCategories';
+import CreateOffering from './pages/CreateOffering';
+  import Messages from './pages/Messages';
 
 const Routing = () => {
   return (
@@ -30,6 +32,8 @@ const Routing = () => {
         <Route path="/buyer/analytics" element={<BuyerAnalytics />} />
         <Route path="/buyer/profile" element={<BuyerProfile />} />
         <Route path="/browse" element={<BrowseCategories />} />
+        <Route path="/vendor/create-offering" element={<CreateOffering />} />
+      <Route path="/messages" element={<Messages />} />
       </Routes>
     </BrowserRouter>
   );

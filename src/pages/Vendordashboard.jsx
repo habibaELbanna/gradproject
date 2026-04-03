@@ -192,7 +192,7 @@ export default function VendorDashboard() {
                   <p className="vd__need-cat">{n.category}</p>
                   <p className="vd__need-budget">EGP {(n.budget || 0).toLocaleString()}</p>
                   <p className="vd__need-meta">{n.proposals} proposals · {n.daysLeft} days left</p>
-                  <button className="vd__need-link" onClick={() => navigate('/browse')}>Submit Proposal →</button>
+                  <button className="vd__need-link" onClick={() => navigate('/vendor/create-offering')}>Submit Proposal →</button>
                 </div>
               ))}
             </div>

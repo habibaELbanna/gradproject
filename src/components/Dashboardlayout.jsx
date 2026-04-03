@@ -72,7 +72,7 @@ export default function DashboardLayout({ children, breadcrumb, pageTitle }) {
         </nav>
 
         <div className="dash__sidebar-bottom">
-          <button className="dash__submit-btn" onClick={() => navigate('/proposals/new')}>
+          <button className="dash__submit-btn" onClick={() => navigate('/vendor/create-offering')}>
             {t('submit_proposal')}
           </button>
           <div className="dash__nav-item" onClick={() => navigate('/help')}>
