@@ -122,10 +122,12 @@
   .ba__kpis { grid-template-columns: 1fr 1fr; }
   .ba__two-col { grid-template-columns: 1fr; }
   .ba__insights { grid-template-columns: 1fr; }
+  .ba__charts-row { grid-template-columns: 1fr; }
   .ba__page-header { flex-direction: column; }
 }
 @media (max-width: 430px) {
   .ba__kpis { grid-template-columns: 1fr; }
+  .ba__charts-row { grid-template-columns: 1fr; }
   .ba__page-title { font-size: 22px; }
   .ba__card { padding: 16px; }
 }

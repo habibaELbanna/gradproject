@@ -116,7 +116,7 @@
   .bd__header { flex-direction: column; }
 }
 @media (max-width: 430px) {
-  .bd__kpis { grid-template-columns: 1fr 1fr; }
+  .bd__kpis { grid-template-columns: 1fr; }
   .bd__recommended-grid { grid-template-columns: 1fr; }
   .bd__card { padding: 16px; }
 }

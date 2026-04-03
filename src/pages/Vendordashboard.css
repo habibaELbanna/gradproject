@@ -87,6 +87,6 @@
   .vd__kpis { grid-template-columns: repeat(2,1fr); }
 }
 @media (max-width: 430px) {
-  .vd__kpis { grid-template-columns: 1fr 1fr; }
+  .vd__kpis { grid-template-columns: 1fr; }
   .vd__card { padding: 16px; }
 }
