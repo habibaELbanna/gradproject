@@ -19,9 +19,17 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     setError('');
-    const { error } = await supabase.auth.signInWithPassword({ email: form.email, password: form.password });
-    if (error) { setError(error.message); setLoading(false); }
-    else navigate('/dashboard');
+    const { data, error } = await supabase.auth.signInWithPassword({ 
+      email: form.email, password: form.password 
+    });
+    if (error) { setError(error.message); setLoading(false); return; }
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', data.user.id)
+      .single();
+    if (profile?.role === 'vendor') navigate('/analytics');
+    else navigate('/buyer/analytics');
   };
 
   return (
@@ -47,7 +55,7 @@ export default function Login() {
             <label className="auth__label">Email Address</label>
             <div className="auth__input-wrap">
               <svg className="auth__icon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" strokeWidth="1.5"/><path d="M22 6l-10 7L2 6" stroke="currentColor" strokeWidth="1.5"/></svg>
-              <input className="auth__input" type="email" name="email" placeholder="you@example.com" value={form.email} onChange={handleChange} required />
+              <input className="auth__input" type="email" name="email" placeholder="you@example.com" value={form.email} onChange={handleChange} />
             </div>
           </div>
 
@@ -55,7 +63,7 @@ export default function Login() {
             <label className="auth__label">Password</label>
             <div className="auth__input-wrap">
               <svg className="auth__icon" width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" strokeWidth="1.5"/></svg>
-              <input className="auth__input" type={showPass ? 'text' : 'password'} name="password" placeholder="Enter your password" value={form.password} onChange={handleChange} required />
+              <input className="auth__input" type={showPass ? 'text' : 'password'} name="password" placeholder="Enter your password" value={form.password} onChange={handleChange} />
               <button type="button" className="auth__eye" onClick={() => setShowPass(!showPass)}>
                 {showPass
                   ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" stroke="currentColor" strokeWidth="1.5"/><line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" strokeWidth="1.5"/></svg>
