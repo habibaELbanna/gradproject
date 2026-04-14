@@ -37,16 +37,14 @@ export default function Pricing() {
 
   return (
     <section className="pricing" ref={ref}>
+      <div className="pricing__label-wrap">
+        <SectionLabel title={t('pricing_label')} number="009" />
+      </div>
       <div className="pricing__top">
-        <div>
-          <h2 className={`pricing__title${visible ? ' pricing__title--visible' : ''}`}>
-            {t('pricing_title1')}<br />{t('pricing_title2')}
-          </h2>
-          <a href="/pricing" className="pricing__link">{t('pricing_link')}</a>
-        </div>
-        <div className="pricing__label-wrap">
-          <SectionLabel title={t('pricing_label')} number="009" />
-        </div>
+        <h2 className={`pricing__title${visible ? ' pricing__title--visible' : ''}`}>
+          {t('pricing_title1')}<br />{t('pricing_title2')}
+        </h2>
+        <a href="/pricing" className="pricing__link">{t('pricing_link')}</a>
       </div>
       <div className="pricing__cards">
         {PLANS.map((plan, i) => (

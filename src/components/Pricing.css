@@ -4,10 +4,16 @@
   overflow: hidden;
 }
 
+.pricing__label-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
 .pricing__top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-end;
   margin-bottom: 60px;
   gap: 40px;
 }
@@ -41,10 +47,6 @@
   text-decoration: underline;
 }
 
-.pricing__label-wrap {
-  flex-shrink: 0;
-  padding-top: 8px;
-}
 
 .pricing__cards {
   display: grid;
@@ -233,4 +235,10 @@
 
 @media (max-width: 768px) {
   .pricing { padding: 60px 24px; }
+}
+
+@media (max-width: 768px) {
+  .pricing__top { flex-direction: column; }
+  .pricing__cards { grid-template-columns: 1fr; }
+  .pricing__card { width: 100%; height: auto; min-height: unset; }
 }
