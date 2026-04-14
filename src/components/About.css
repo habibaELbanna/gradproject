@@ -15,6 +15,7 @@
   align-items: flex-start;
   gap: 80px;
   margin-bottom: 80px;
+  overflow: visible;
 }
 
 .about__left {
@@ -80,14 +81,6 @@
 
 .about__link:hover {
   text-decoration: underline;
-}
-
-.about__body {
-  display: flex;
-  align-items: flex-start;
-  gap: 80px;
-  margin-bottom: 80px;
-  overflow: visible;
 }
 
 .about__right {
@@ -180,22 +173,13 @@
   border-color: rgba(0, 167, 229, 0.4);
 }
 
+/* ← removed z-index from both slide classes so cards stay in place visually */
 .about__stat--slide-left {
   transform: translateX(-420px) !important;
-  z-index: 4 !important;
 }
 
 .about__stat--slide-right {
   transform: translateX(420px) !important;
-  z-index: 4 !important;
-}
-
-.about__stats:hover .about__stat:nth-child(1) {
-  transform: translateX(-290px);
-}
-
-.about__stats:hover .about__stat:nth-child(3) {
-  transform: translateX(290px);
 }
 
 .about__stat-num {
@@ -225,6 +209,7 @@
   }
   .about__body {
     flex-direction: column;
+    gap: 40px;
   }
   .about__right {
     display: none;
@@ -235,25 +220,10 @@
   .about {
     padding: 60px 24px;
   }
-  .about__stats {
-    grid-template-columns: 1fr;
-  }
-  .about__stat {
-    border-right: none;
-    border-bottom: 1px solid #1e1e1e;
-  }
-}
-
-@media (max-width: 768px) {
   .about__body { flex-direction: column; }
   .about__right { display: none; }
   .about__stats { height: auto; flex-direction: column; align-items: center; gap: 16px; }
   .about__stat:nth-child(1), .about__stat:nth-child(3) { transform: translateX(0); position: relative; }
-}
-
-@media (max-width: 1024px) {
-  .about__body { gap: 40px; }
-  .about__right { padding-left: 0; }
 }
 
 @media (max-width: 430px) {

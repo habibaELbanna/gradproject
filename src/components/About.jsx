@@ -4,14 +4,14 @@ import SectionLabel from './Sectionlabel';
 import Cubes from './Cubes';
 import './About.css';
 
-function useScrollReveal() {
+function useScrollReveal(threshold = 0.15) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const el = ref.current;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
-      { threshold: 0.15 }
+      { threshold }
     );
     if (el) observer.observe(el);
     return () => observer.disconnect();
@@ -35,10 +35,12 @@ function useCounter(target, suffix, active, duration = 1400) {
   return value;
 }
 
-function StatCard({ number, label }) {
-  const [ref, visible] = useScrollReveal();
+function StatCard({ number, label, visible, delay = '0s', extraClass = '' }) {
   return (
-    <div ref={ref} className={`about__stat${visible ? ' about__stat--visible' : ''}`}>
+    <div
+      className={`about__stat${visible ? ' about__stat--visible' : ''}${extraClass ? ` ${extraClass}` : ''}`}
+      style={{ transitionDelay: visible ? '0s' : delay }}
+    >
       <span className="about__stat-num">{number}</span>
       <span className="about__stat-label">{label}</span>
     </div>
@@ -47,8 +49,8 @@ function StatCard({ number, label }) {
 
 export default function About() {
   const { t } = useTranslation();
-  const [sectionRef, sectionVisible] = useScrollReveal();
-  const [statsRef, statsVisible] = useScrollReveal();
+  const [sectionRef, sectionVisible] = useScrollReveal(0.1);
+  const [statsRef, statsVisible] = useScrollReveal(0.05);
   const [middleHovered, setMiddleHovered] = useState(false);
 
   const s1 = useCounter(5, 'M+', statsVisible, 1200);
@@ -81,16 +83,29 @@ export default function About() {
       </div>
 
       <div className="about__stats" ref={statsRef}>
-        <StatCard number={`$${s1}`} label={t('stat_val')} />
+        <StatCard
+          number={`$${s1}`}
+          label={t('stat_val')}
+          visible={statsVisible}
+          delay="0s"
+          extraClass={middleHovered ? 'about__stat--slide-left' : ''}
+        />
         <div
           className={`about__stat about__stat--middle${statsVisible ? ' about__stat--visible' : ''}`}
+          style={{ transitionDelay: statsVisible ? '0s' : '0.15s' }}
           onMouseEnter={() => setMiddleHovered(true)}
           onMouseLeave={() => setMiddleHovered(false)}
         >
           <span className="about__stat-num">{s2}</span>
           <span className="about__stat-label">{t('stat_users')}</span>
         </div>
-        <StatCard number={s3} label={t('stat_rate')} className={middleHovered ? 'about__stat--slide-right' : ''} />
+        <StatCard
+          number={s3}
+          label={t('stat_rate')}
+          visible={statsVisible}
+          delay="0.3s"
+          extraClass={middleHovered ? 'about__stat--slide-right' : ''}
+        />
       </div>
     </section>
   );
