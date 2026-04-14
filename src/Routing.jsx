@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
+import AboutPage from './pages/Aboutpage';
 import SignupRole from './pages/SignupRole';
 import SignupDetails from './pages/Signupdetails';
 import SignupProfile from './pages/Signupprofile';
@@ -13,13 +14,14 @@ import BuyerAnalytics from './pages/Buyeranalytics';
 import BuyerProfile from './pages/Buyerprofile';
 import BrowseCategories from './pages/BrowseCategories';
 import CreateOffering from './pages/CreateOffering';
-  import Messages from './pages/Messages';
+import Messages from './pages/Messages';
 
 const Routing = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup/role" element={<SignupRole />} />
         <Route path="/signup/details" element={<SignupDetails />} />
@@ -33,7 +35,7 @@ const Routing = () => {
         <Route path="/buyer/profile" element={<BuyerProfile />} />
         <Route path="/browse" element={<BrowseCategories />} />
         <Route path="/vendor/create-offering" element={<CreateOffering />} />
-      <Route path="/messages" element={<Messages />} />
+        <Route path="/messages" element={<Messages />} />
       </Routes>
     </BrowserRouter>
   );
