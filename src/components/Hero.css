@@ -124,7 +124,7 @@
 /* ── Subtitle + CTA ── */
 .hero__sub {
   position: absolute;
-  top: 510px;
+  top: 433px;
   left: 120px;
   z-index: 10;
   opacity: 0;
