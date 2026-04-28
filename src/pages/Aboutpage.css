@@ -15,7 +15,7 @@
 .ap__card-wrap {
   position: relative;
   width: min(1050px, 92vw);
-  aspect-ratio: 797 / 620;
+  aspect-ratio: 870 / 500;
   overflow: visible;
   opacity: 0;
   transform: translateY(28px);
@@ -39,11 +39,11 @@
 /* ── Text block — absolutely positioned left side ── */
 .ap__card-text {
   position: absolute;
-  top: 42%;
+  top: 45%;
   left: 0;
   transform: translateY(-50%);
-  width: 44%;
-  padding: 0 0 0 8%;
+  width: 42%;
+  padding: 0 0 0 7%;
   z-index: 2;
 }
 
@@ -67,10 +67,10 @@
 
 .ap__desc {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: #9CA3AF;
   line-height: 1.8;
-  margin: 0 0 10px;
+  margin: 0 0 14px;
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s;
@@ -85,23 +85,50 @@
 
 
 
-/* ── Bird — right side of card ── */
+/* ── Bird — flying out of the right side of the card ── */
 .ap__bird-wrap {
   position: absolute;
-  top: 50%;
-  left: 38%;
-  right: -6%;
-  transform: translateY(-50%);
+  top: 64%;
+  left: 40%;
+  right: -10%;
   overflow: visible;
-  z-index: 2;
-  -webkit-mask-image: linear-gradient(to right, black 60%, transparent 90%);
-  mask-image: linear-gradient(to right, black 60%, transparent 90%);
+  z-index: 3;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.ap__bird-wrap::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 150%;
+  background: radial-gradient(ellipse at center, rgba(0, 167, 229, 0.5) 0%, rgba(0, 167, 229, 0.22) 25%, rgba(0, 167, 229, 0.08) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(10px);
 }
 
 .ap__bird {
   width: 100%;
   height: auto;
   display: block;
+  pointer-events: auto;
+}
+
+.ap__bird-shadow {
+  position: absolute;
+  bottom: -8%;
+  left: 18%;
+  right: 22%;
+  height: 32px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.22) 45%, transparent 75%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: -1;
+  transform-origin: center center;
 }
 
 /* ─── Stats strip ─── */
@@ -299,47 +326,87 @@
   .ap__journey { padding: 60px 20px; }
 }
 
-/* ─── Mission ─── */
+/* ─── Mission & Vision ─── */
 .ap__mission {
-  padding: 100px 80px;
+  padding: 100px 0;
   border-top: 1px solid #1a1a1a;
+  background: radial-gradient(ellipse at 85% 50%, rgba(0, 40, 80, 0.55) 0%, transparent 60%);
+  overflow: hidden;
 }
 
-.ap__mission-body {
+.ap__mv-row {
   display: flex;
-  gap: 80px;
-  align-items: flex-start;
+  align-items: center;
+  margin-bottom: 60px;
+  height: 200px;
 }
 
-.ap__mission-heading {
-  flex: 0 0 auto;
+.ap__mv-row:last-child { margin-bottom: 0; }
+
+/* Mission — flush left */
+.ap__mv-row:first-child .ap__mv-text {
+  padding-left: 80px;
+}
+
+/* Vision — indented */
+.ap__mv-row--indent .ap__mv-text {
+  padding-left: 180px;
+}
+
+.ap__mv-text {
+  flex: 0 0 540px;
+  align-self: center;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.ap__mv-text--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ap__mv-heading {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: clamp(28px, 3vw, 48px);
+  font-size: clamp(28px, 3vw, 44px);
   font-weight: 900;
   color: #ffffff;
-  line-height: 1.05;
   letter-spacing: -1px;
-  margin: 0;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+  line-height: 1;
+  margin: 0 0 16px;
 }
 
-.ap__mission-heading--visible { opacity: 1; transform: translateY(0); }
-
-.ap__mission-text {
-  flex: 1;
+.ap__mv-desc {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   color: #9CA3AF;
-  line-height: 1.9;
+  line-height: 1.75;
   margin: 0;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease 0.25s, transform 0.7s ease 0.25s;
+  max-width: 400px;
 }
 
-.ap__mission-text--visible { opacity: 1; transform: translateY(0); }
+/* Line takes up all remaining right space */
+.ap__mv-line {
+  flex: 1;
+  height: 200px;
+  position: relative;
+}
+
+.ap__hline-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1024px) {
+  .ap__mv-row { flex-direction: column; align-items: flex-start; gap: 32px; margin-bottom: 60px; }
+  .ap__mv-row:first-child .ap__mv-text { padding-left: 40px; }
+  .ap__mv-row--indent .ap__mv-text { padding-left: 40px; }
+  .ap__mv-text { flex: unset; }
+  .ap__mv-line { width: 100%; }
+}
 
 /* ─── Values ─── */
 .ap__values {
@@ -533,7 +600,7 @@
   .ap__hero { padding: 24px 20px 0; }
   .ap__card-wrap { width: 100%; aspect-ratio: unset; min-height: 480px; }
   .ap__card-text { position: absolute; top: 38%; left: 0; transform: translateY(-50%); width: 55%; padding: 0 0 0 7%; }
-  .ap__bird-wrap { width: 50%; right: -2%; }
+  .ap__bird-wrap { left: 42%; right: -8%; }
   .ap__stats-section { height: 160px; }
   .ap__stat { padding: 0 12px; }
   .ap__stat-num { font-size: 28px; }

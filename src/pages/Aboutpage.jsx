@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import gsap from 'gsap';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import bigbird from '../Assets/bigbird.svg';
@@ -93,6 +95,96 @@ function LinesCanvas() {
   return <canvas ref={canvasRef} className="ap__lines-canvas" />;
 }
 
+
+function HorizontalLine({ delay = 0 }) {
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animId;
+    // Two nodes traveling along the line
+    const nodes = [
+      { progress: 0.0, speed: 0.0025, size: 3 },
+      { progress: 0.5, speed: 0.0025, size: 3 },
+    ];
+    function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const W = canvas.width, H = canvas.height;
+
+      // The line: starts with a dot at left, goes horizontal then angles up-right
+      // dot at (0, mid), horizontal to breakX, then diagonal to top-right corner
+      const dotX = 0;
+      const dotY = H * 0.55;
+      const breakX = W * 0.45;  // where line bends
+      const endX = W;
+      const endY = H * 0.05;
+
+      // Glow behind dot
+      const glow = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, 22);
+      glow.addColorStop(0, 'rgba(0,167,229,0.6)');
+      glow.addColorStop(0.4, 'rgba(0,167,229,0.2)');
+      glow.addColorStop(1, 'rgba(0,167,229,0)');
+      ctx.beginPath();
+      ctx.arc(dotX, dotY, 22, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+
+      // Dot
+      ctx.beginPath();
+      ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#00A7E5';
+      ctx.fill();
+
+      // Line
+      ctx.beginPath();
+      ctx.moveTo(dotX + 6, dotY);
+      ctx.lineTo(breakX, dotY);
+      ctx.lineTo(endX, endY);
+      ctx.strokeStyle = '#00A7E5';
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.6;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      // Nodes traveling along the path
+      const seg1Len = breakX - dotX - 6;
+      const seg2Len = Math.hypot(endX - breakX, endY - dotY);
+      const totalLen = seg1Len + seg2Len;
+
+      nodes.forEach(node => {
+        node.progress += node.speed;
+        if (node.progress > 1) node.progress -= 1;
+        const dist = node.progress * totalLen;
+        let nx, ny;
+        if (dist <= seg1Len) {
+          nx = dotX + 6 + dist;
+          ny = dotY;
+        } else {
+          const t = (dist - seg1Len) / seg2Len;
+          nx = breakX + (endX - breakX) * t;
+          ny = dotY + (endY - dotY) * t;
+        }
+        const g = ctx.createRadialGradient(nx, ny, 0, nx, ny, node.size * 5);
+        g.addColorStop(0, 'rgba(255,255,255,0.7)');
+        g.addColorStop(0.3, 'rgba(255,255,255,0.2)');
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.beginPath(); ctx.arc(nx, ny, node.size * 5, 0, Math.PI * 2);
+        ctx.fillStyle = g; ctx.fill();
+        ctx.beginPath(); ctx.arc(nx, ny, node.size, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff'; ctx.fill();
+      });
+
+      animId = requestAnimationFrame(draw);
+    }
+    const t = setTimeout(() => { draw(); }, delay);
+    return () => { cancelAnimationFrame(animId); clearTimeout(t); window.removeEventListener('resize', resize); };
+  }, [delay]);
+  return <canvas ref={canvasRef} className="ap__hline-canvas" />;
+}
+
 const VALUES = [
   { title: 'TRANSPARENCY', desc: 'Every transaction, every vendor, every deal — fully visible and traceable on our platform.' },
   { title: 'EFFICIENCY',   desc: 'We cut procurement time from weeks to hours through smart matching and automated workflows.' },
@@ -109,6 +201,7 @@ const TEAM = [
 
 export default function AboutPage() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const [heroRef, heroVisible]       = useScrollReveal(0.05);
   const [statsRef, statsVisible]     = useScrollReveal(0.1);
@@ -123,6 +216,74 @@ export default function AboutPage() {
   const potential = useCounter(500, 'M+', '$', statsVisible, 1300);
 
   const birdRef = useRef(null);
+  const birdWrapRef = useRef(null);
+  const shadowRef = useRef(null);
+
+  // Entrance: bird flies in from the left, scales up from far → near
+  useEffect(() => {
+    const wrap = birdWrapRef.current;
+    const shadow = shadowRef.current;
+    if (!wrap) return;
+    gsap.set(wrap, { xPercent: -180, yPercent: -50, scale: 0.5, opacity: 0 });
+    if (shadow) gsap.set(shadow, { scaleX: 0.4, opacity: 0 });
+    if (!heroVisible) return;
+    gsap.to(wrap, {
+      xPercent: 0,
+      scale: 1,
+      opacity: 1,
+      duration: 1.6,
+      ease: 'power3.out',
+      delay: 0.4,
+    });
+    if (shadow) {
+      gsap.to(shadow, {
+        scaleX: 1,
+        opacity: 1,
+        duration: 1.6,
+        ease: 'power3.out',
+        delay: 0.5,
+        onComplete: () => {
+          // Continuous pulse — sells the "bird is alive and flapping" feel
+          gsap.to(shadow, {
+            scaleX: 0.78,
+            opacity: 0.55,
+            duration: 1.4,
+            yoyo: true,
+            repeat: -1,
+            ease: 'sine.inOut',
+          });
+        }
+      });
+    }
+  }, [heroVisible]);
+
+  // Exit: bird flies out to the right, scales down as it gets "further"
+  useEffect(() => {
+    const handleClick = (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+      if (href === window.location.pathname) return;
+      e.preventDefault();
+      const wrap = birdWrapRef.current;
+      const shadow = shadowRef.current;
+      if (!wrap) { navigate(href); return; }
+      // Stop the shadow pulse so exit reads cleanly
+      if (shadow) gsap.killTweensOf(shadow);
+      gsap.to(wrap, {
+        xPercent: 160,
+        scale: 0.4,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.in',
+        onComplete: () => navigate(href),
+      });
+    };
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, [navigate]);
 
   const handleMouseMove = useCallback((e) => {
     const el = birdRef.current;
@@ -163,10 +324,21 @@ export default function AboutPage() {
             viewBox="0 0 797 620"
             preserveAspectRatio="none"
           >
+            <defs>
+              <linearGradient id="apFrameGlow" x1="0%" y1="50%" x2="65%" y2="50%">
+                <stop offset="0%" stopColor="#0E0E0E" stopOpacity="0.95" />
+                <stop offset="35%" stopColor="#0E0E0E" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="#0E0E0E" stopOpacity="0" />
+              </linearGradient>
+            </defs>
             <path
               d="M796.141 97.1C796.141 82.9357 785.358 71.0996 771.255 69.7829L30.4859 0.621197C14.3961 -0.881022 0.499573 11.7785 0.499573 27.9383V591.414C0.499573 607.574 14.3961 620.234 30.486 618.731L771.255 549.57C785.358 548.253 796.141 536.417 796.141 522.253V97.1Z"
               fill="#0E0E0E"
               stroke="#00A7E5"
+            />
+            <path
+              d="M796.141 97.1C796.141 82.9357 785.358 71.0996 771.255 69.7829L30.4859 0.621197C14.3961 -0.881022 0.499573 11.7785 0.499573 27.9383V591.414C0.499573 607.574 14.3961 620.234 30.486 618.731L771.255 549.57C785.358 548.253 796.141 536.417 796.141 522.253V97.1Z"
+              fill="url(#apFrameGlow)"
             />
           </svg>
 
@@ -184,8 +356,9 @@ export default function AboutPage() {
           </div>
 
           {/* Bird — right side */}
-          <div className="ap__bird-wrap" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+          <div ref={birdWrapRef} className="ap__bird-wrap" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
             <img ref={birdRef} src={bigbird} alt="" className="ap__bird" style={{ transformStyle: "preserve-3d", transition: "transform 0.12s ease-out" }} />
+            <div ref={shadowRef} className="ap__bird-shadow" />
           </div>
 
         </div>
@@ -238,24 +411,31 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Mission ── */}
+      {/* ── Mission & Vision ── */}
       <section className="ap__mission" ref={missionRef}>
-        <div className={`ap__section-label${missionVisible ? ' ap__section-label--visible' : ''}`}>
-          <span>OUR MISSION</span>
-          <span className="ap__label-divider" />
-          <span className="ap__label-num">002</span>
+        <div className="ap__mv-row">
+          <div className={`ap__mv-text${missionVisible ? ' ap__mv-text--visible' : ''}`}>
+            <h2 className="ap__mv-heading">OUR MISSION</h2>
+            <p className="ap__mv-desc">
+              To empower Egyptian businesses with a transparent, efficient, and trustworthy B2B
+              procurement platform that drives growth and fosters lasting partnerships across industries.
+            </p>
+          </div>
+          <div className="ap__mv-line">
+            <HorizontalLine delay={0} />
+          </div>
         </div>
-        <div className="ap__mission-body">
-          <h2 className={`ap__mission-heading${missionVisible ? ' ap__mission-heading--visible' : ''}`}>
-            CONNECTING EGYPT'S<br />BUSINESS ECOSYSTEM
-          </h2>
-          <p className={`ap__mission-text${missionVisible ? ' ap__mission-text--visible' : ''}`}>
-            Sela was founded with a single mission: to modernize B2B procurement in Egypt.
-            We saw businesses spending weeks finding suppliers, negotiating over phone calls,
-            and closing deals with no transparency or accountability. We built the platform
-            we always wished existed — one that brings speed, trust, and intelligence to
-            every procurement decision.
-          </p>
+        <div className="ap__mv-row ap__mv-row--indent">
+          <div className={`ap__mv-text${missionVisible ? ' ap__mv-text--visible' : ''}`} style={{ transitionDelay: '0.2s' }}>
+            <h2 className="ap__mv-heading">OUR VISION</h2>
+            <p className="ap__mv-desc">
+              To become the leading B2B procurement ecosystem in the MENA region, setting new
+              standards for transparency, innovation, and business growth in the digital age.
+            </p>
+          </div>
+          <div className="ap__mv-line">
+            <HorizontalLine delay={400} />
+          </div>
         </div>
       </section>
 
