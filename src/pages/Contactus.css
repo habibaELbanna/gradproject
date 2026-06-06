@@ -1,0 +1,264 @@
+.cu {
+  background: #0e0e0e;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── Hero ─── */
+.cu-hero {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 150px 80px 80px;
+}
+
+.cu-hero__watermark {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%) scale(0.97);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(64px, 13vw, 210px);
+  letter-spacing: -4px;
+  line-height: 1;
+  background: linear-gradient(180deg, rgba(0, 167, 229, 0.6) 0%, rgba(0, 90, 130, 0.18) 55%, rgba(0, 40, 60, 0) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.cu-hero:hover .cu-hero__watermark {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.cu-hero > *:not(.cu-hero__watermark) {
+  position: relative;
+  z-index: 1;
+}
+
+.cu-hero__title {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 16px;
+}
+
+.cu-hero__sub {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: clamp(13px, 1.3vw, 15px);
+  color: #9CA3AF;
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ─── Prefer email / call (Mission & Vision layout) ─── */
+.cu-prefer {
+  padding: 100px 0;
+  background: radial-gradient(ellipse at 85% 50%, rgba(0, 40, 80, 0.55) 0%, transparent 60%);
+  overflow: hidden;
+}
+
+.cu-mv-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+  height: 200px;
+}
+
+.cu-mv-row:last-child { margin-bottom: 0; }
+
+.cu-mv-row:first-child .cu-mv-text { padding-left: 80px; }
+.cu-mv-row--indent .cu-mv-text { padding-left: 180px; }
+
+.cu-mv-text {
+  flex: 0 0 540px;
+  align-self: center;
+}
+
+.cu-mv-heading {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin: 0 0 16px;
+}
+
+.cu-mv-desc {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  color: #9CA3AF;
+  line-height: 1.7;
+  margin: 0 0 8px;
+  max-width: 440px;
+}
+
+.cu-mv-link {
+  display: inline-block;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  color: #00A7E5;
+  text-decoration: none;
+}
+
+.cu-mv-line {
+  flex: 1;
+  height: 200px;
+  position: relative;
+}
+
+.cu-hline-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Customer service hours ─── */
+.cu-hours {
+  padding: 40px 80px 100px;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.cu-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #1e2733;
+}
+
+.cu-table__title {
+  background: #0f2230;
+  color: #ffffff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 16px;
+  text-align: center;
+}
+
+.cu-table th,
+.cu-table td {
+  border: 1px solid #1e2733;
+  padding: 16px;
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #9CA3AF;
+}
+
+.cu-table__cols th {
+  background: #0c1a24;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.cu-table__day {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* ─── News ─── */
+.cu-news {
+  padding: 100px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cu-news .section-label-wrap { margin-bottom: 48px; }
+
+.cu-news-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.cu-news-card {
+  background: #0E0E0E;
+  border: 1px solid #1e1e1e;
+  padding: 44px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.cu-news-card:hover {
+  border-color: rgba(0, 167, 229, 0.55);
+  box-shadow: 0 0 34px rgba(0, 167, 229, 0.22);
+}
+
+.cu-news-source {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #6B7280;
+  margin-bottom: 18px;
+}
+
+.cu-news-title {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  margin: 0 0 18px;
+}
+
+.cu-news-date {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #6B7280;
+  margin-bottom: 24px;
+}
+
+.cu-news-link {
+  margin-top: auto;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #00A7E5;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.cu-news-link:hover { opacity: 0.7; }
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .cu-hero { padding: 120px 40px 60px; }
+  .cu-mv-row { flex-direction: column; align-items: flex-start; gap: 28px; height: auto; margin-bottom: 48px; }
+  .cu-mv-row:first-child .cu-mv-text,
+  .cu-mv-row--indent .cu-mv-text { padding-left: 40px; }
+  .cu-mv-text { flex: unset; }
+  .cu-mv-line { width: 100%; height: 120px; }
+  .cu-hours { padding: 20px 40px 80px; }
+  .cu-news { padding: 80px 40px; }
+  .cu-news-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .cu-hero { padding: 100px 20px 50px; }
+  .cu-hours { padding: 20px 20px 60px; }
+  .cu-table th, .cu-table td { padding: 10px; font-size: 12px; }
+  .cu-news { padding: 60px 20px; }
+  .cu-news-card { padding: 32px 28px; }
+}

@@ -16,6 +16,7 @@ import BrowseCategories from './pages/BrowseCategories';
 import CreateOffering from './pages/CreateOffering';
 import Messages from './pages/Messages';
 import PricingPage from './pages/Pricingpage';
+import ContactUs from './pages/Contactus';
 
 const Routing = () => {
   return (
@@ -38,6 +39,7 @@ const Routing = () => {
         <Route path="/vendor/create-offering" element={<CreateOffering />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/contact" element={<ContactUs />} />
       </Routes>
     </BrowserRouter>
   );
