@@ -4,10 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import CTA from '../components/Cta';
 import bigbird from '../Assets/bigbird.svg';
 import icon1 from '../Assets/icon1.svg';
 import icon2 from '../Assets/icon2.svg';
 import icon3 from '../Assets/icon3.svg';
+import loc1 from '../Assets/loc1.png';
+import loc2 from '../Assets/loc2.png';
+import loc3 from '../Assets/loc3.png';
 import './Aboutpage.css';
 
 function useScrollReveal(threshold = 0.1) {
@@ -96,61 +100,60 @@ function LinesCanvas() {
 }
 
 
-function HorizontalLine({ delay = 0 }) {
+function HorizontalLine({ direction = 'down' }) {
   const canvasRef = useRef(null);
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let animId;
-    // Two nodes traveling along the line
     const nodes = [
-      { progress: 0.0, speed: 0.0025, size: 3 },
-      { progress: 0.5, speed: 0.0025, size: 3 },
+      { progress: 0.0, speed: 0.0035, size: 3 },
+      { progress: 0.5, speed: 0.0035, size: 3 },
     ];
     function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
     resize();
     window.addEventListener('resize', resize);
+
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const W = canvas.width, H = canvas.height;
 
-      // The line: starts with a dot at left, goes horizontal then angles up-right
-      // dot at (0, mid), horizontal to breakX, then diagonal to top-right corner
-      const dotX = 0;
-      const dotY = H * 0.55;
-      const breakX = W * 0.45;  // where line bends
+      // Lines start further into the canvas — short and exit the right edge
+      const dotX = W * 0.28;
+      const dotY = H * 0.5;
+      const breakX = W * 0.70;
       const endX = W;
-      const endY = H * 0.05;
+      const endY = direction === 'down' ? H * 0.95 : H * 0.5;
 
-      // Glow behind dot
-      const glow = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, 22);
-      glow.addColorStop(0, 'rgba(0,167,229,0.6)');
-      glow.addColorStop(0.4, 'rgba(0,167,229,0.2)');
+      // Soft glow behind dot
+      const glow = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, 26);
+      glow.addColorStop(0, 'rgba(0,167,229,0.7)');
+      glow.addColorStop(0.4, 'rgba(0,167,229,0.25)');
       glow.addColorStop(1, 'rgba(0,167,229,0)');
       ctx.beginPath();
-      ctx.arc(dotX, dotY, 22, 0, Math.PI * 2);
+      ctx.arc(dotX, dotY, 26, 0, Math.PI * 2);
       ctx.fillStyle = glow;
       ctx.fill();
 
-      // Dot
+      // Solid blue dot
       ctx.beginPath();
-      ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
+      ctx.arc(dotX, dotY, 7, 0, Math.PI * 2);
       ctx.fillStyle = '#00A7E5';
       ctx.fill();
 
       // Line
       ctx.beginPath();
-      ctx.moveTo(dotX + 6, dotY);
+      ctx.moveTo(dotX + 8, dotY);
       ctx.lineTo(breakX, dotY);
       ctx.lineTo(endX, endY);
       ctx.strokeStyle = '#00A7E5';
       ctx.lineWidth = 1;
-      ctx.globalAlpha = 0.6;
+      ctx.globalAlpha = 0.75;
       ctx.stroke();
       ctx.globalAlpha = 1;
 
-      // Nodes traveling along the path
-      const seg1Len = breakX - dotX - 6;
+      // Traveling white sparkle nodes
+      const seg1Len = breakX - dotX - 8;
       const seg2Len = Math.hypot(endX - breakX, endY - dotY);
       const totalLen = seg1Len + seg2Len;
 
@@ -160,7 +163,7 @@ function HorizontalLine({ delay = 0 }) {
         const dist = node.progress * totalLen;
         let nx, ny;
         if (dist <= seg1Len) {
-          nx = dotX + 6 + dist;
+          nx = dotX + 8 + dist;
           ny = dotY;
         } else {
           const t = (dist - seg1Len) / seg2Len;
@@ -179,24 +182,50 @@ function HorizontalLine({ delay = 0 }) {
 
       animId = requestAnimationFrame(draw);
     }
-    const t = setTimeout(() => { draw(); }, delay);
-    return () => { cancelAnimationFrame(animId); clearTimeout(t); window.removeEventListener('resize', resize); };
-  }, [delay]);
+    draw();
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
+  }, [direction]);
   return <canvas ref={canvasRef} className="ap__hline-canvas" />;
 }
 
-const VALUES = [
-  { title: 'TRANSPARENCY', desc: 'Every transaction, every vendor, every deal — fully visible and traceable on our platform.' },
-  { title: 'EFFICIENCY',   desc: 'We cut procurement time from weeks to hours through smart matching and automated workflows.' },
-  { title: 'TRUST',        desc: 'All vendors undergo rigorous verification before joining. Your business deserves reliable partners.' },
-  { title: 'GROWTH',       desc: 'Built to scale with Egyptian businesses — from startups to enterprises, Sela grows with you.' },
+const WHO = [
+  {
+    title: 'TRANSPARENCY',
+    desc: 'Open communication and clear processes build trust with every transaction.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#00A7E5" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    ),
+  },
+  {
+    title: 'INNOVATION',
+    desc: 'Continuously evolving our platform to meet the changing needs of modern businesses.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#00A7E5" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 18h6M10 22h4" />
+        <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1h6c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'TRUST',
+    desc: 'Building secure, reliable relationships between buyers and vendors.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#00A7E5" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" />
+      </svg>
+    ),
+  },
 ];
 
-const TEAM = [
-  { name: 'AHMED HASSAN',  role: 'CEO & CO-FOUNDER',   tag: 'LEADERSHIP' },
-  { name: 'SARAH IBRAHIM', role: 'CTO & CO-FOUNDER',   tag: 'TECHNOLOGY' },
-  { name: 'OMAR KHALIL',   role: 'HEAD OF OPERATIONS', tag: 'OPERATIONS' },
-  { name: 'NOUR MAHMOUD',  role: 'HEAD OF PRODUCT',    tag: 'PRODUCT' },
+
+const NEWS = [
+  { source: 'TECHCRUNCH MIDDLE EAST', title: 'SELA Revolutionizes Egyptian B2B Market', date: 'January 2025' },
+  { source: 'ENTERPRISE TIMES',       title: 'How SELA is Transforming Procurement',  date: 'December 2024' },
+  { source: 'CAIRO BUSINESS MONTHLY',  title: 'The Rise of Digital Procurement Platforms', date: 'November 2024' },
+  { source: 'MENA TECH REVIEW',        title: 'SELA Reaches 1000+ Deals Milestone',  date: 'October 2024' },
 ];
 
 export default function AboutPage() {
@@ -206,9 +235,10 @@ export default function AboutPage() {
   const [heroRef, heroVisible]       = useScrollReveal(0.05);
   const [statsRef, statsVisible]     = useScrollReveal(0.1);
   const [missionRef, missionVisible] = useScrollReveal(0.1);
-  const [valuesRef, valuesVisible]   = useScrollReveal(0.1);
-  const [teamRef, teamVisible]       = useScrollReveal(0.1);
+  const [whoRef, whoVisible]         = useScrollReveal(0.1);
+  const [locRef, locVisible]       = useScrollReveal(0.1);
   const [journeyRef, journeyVisible]  = useScrollReveal(0.1);
+  const [newsRef, newsVisible]       = useScrollReveal(0.1);
 
   const vendors  = useCounter(500,  '+',  '',  statsVisible, 1200);
   const deals    = useCounter(2500, '+',  '',  statsVisible, 1400);
@@ -422,7 +452,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="ap__mv-line">
-            <HorizontalLine delay={0} />
+            <HorizontalLine direction="down" />
           </div>
         </div>
         <div className="ap__mv-row ap__mv-row--indent">
@@ -434,65 +464,84 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="ap__mv-line">
-            <HorizontalLine delay={400} />
+            <HorizontalLine direction="flat" />
           </div>
         </div>
       </section>
 
-      {/* ── Values ── */}
-      <section className="ap__values" ref={valuesRef}>
-        <div className={`ap__section-label${valuesVisible ? ' ap__section-label--visible' : ''}`}>
-          <span>WHAT WE STAND FOR</span>
+      {/* ── Who We Are ── */}
+      <section className="ap__who" ref={whoRef}>
+        <div className={`ap__section-label${whoVisible ? ' ap__section-label--visible' : ''}`}>
+          <span>WHO WE ARE</span>
           <span className="ap__label-divider" />
           <span className="ap__label-num">003</span>
         </div>
-        <div className="ap__values-grid">
-          {VALUES.map((v, i) => (
-            <div
-              key={i}
-              className={`ap__value-card${valuesVisible ? ' ap__value-card--visible' : ''}`}
-              style={{ transitionDelay: valuesVisible ? `${i * 0.12}s` : '0s' }}
-            >
-              <span className="ap__value-index">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="ap__value-title">{v.title}</h3>
-              <p className="ap__value-desc">{v.desc}</p>
+        <div className={`ap__who-grid${whoVisible ? ' ap__who-grid--visible' : ''}`}>
+          {WHO.map((w, i) => (
+            <div className="ap__who-card" key={i}>
+              <div className="ap__who-icon">{w.icon}</div>
+              <h3 className="ap__who-title">{w.title}</h3>
+              <p className="ap__who-desc">{w.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── Team ── */}
-      <section className="ap__team" ref={teamRef}>
-        <div className={`ap__section-label${teamVisible ? ' ap__section-label--visible' : ''}`}>
-          <span>THE TEAM</span>
+      {/* ── Location ── */}
+      <section className="ap__loc" ref={locRef}>
+        <div className={`ap__section-label${locVisible ? ' ap__section-label--visible' : ''}`}>
+          <span>LOCATION</span>
           <span className="ap__label-divider" />
           <span className="ap__label-num">004</span>
         </div>
-        <div className="ap__team-grid">
-          {TEAM.map((m, i) => (
+
+        <div className={`ap__loc-card${locVisible ? ' ap__loc-card--visible' : ''}`}>
+          <div className="ap__loc-text">
+            <h3 className="ap__loc-name">Cairo HQ</h3>
+            <p className="ap__loc-info">123 Tahrir Street, Cairo</p>
+            <p className="ap__loc-info">+20 2 1234 5678</p>
+            <p className="ap__loc-info">Sun-Thu, 9AM-6PM</p>
+          </div>
+          <div className="ap__loc-pin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#00A7E5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" />
+              <circle cx="12" cy="10" r="2.6" />
+            </svg>
+          </div>
+        </div>
+
+        <div className={`ap__loc-gallery${locVisible ? ' ap__loc-gallery--visible' : ''}`}>
+          <img src={loc1} alt="Sela brand display" className="ap__loc-img ap__loc-img--1" />
+          <img src={loc2} alt="Sela signage" className="ap__loc-img ap__loc-img--2" />
+          <img src={loc3} alt="Cairo skyline" className="ap__loc-img ap__loc-img--3" />
+        </div>
+      </section>
+
+      {/* ── News ── */}
+      <section className="ap__news" ref={newsRef}>
+        <div className={`ap__section-label${newsVisible ? ' ap__section-label--visible' : ''}`}>
+          <span>NEWS</span>
+          <span className="ap__label-divider" />
+          <span className="ap__label-num">007</span>
+        </div>
+        <div className="ap__news-grid">
+          {NEWS.map((n, i) => (
             <div
               key={i}
-              className={`ap__team-card${teamVisible ? ' ap__team-card--visible' : ''}`}
-              style={{ transitionDelay: teamVisible ? `${i * 0.1}s` : '0s' }}
+              className={`ap__news-card${newsVisible ? ' ap__news-card--visible' : ''}`}
+              style={{ transitionDelay: newsVisible ? `${i * 0.1}s` : '0s' }}
             >
-              <div className="ap__team-avatar"><div className="ap__team-avatar-inner" /></div>
-              <span className="ap__team-tag">{m.tag}</span>
-              <h4 className="ap__team-name">{m.name}</h4>
-              <p className="ap__team-role">{m.role}</p>
+              <span className="ap__news-source">{n.source}</span>
+              <h3 className="ap__news-title">{n.title}</h3>
+              <span className="ap__news-date">{n.date}</span>
+              <a href="#" className="ap__news-link" onClick={(e) => e.preventDefault()}>READ ARTICLE →</a>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <section className="ap__cta">
-        <div className="ap__cta-glow" />
-        <h2 className="ap__cta-heading">READY TO TRANSFORM<br />YOUR PROCUREMENT?</h2>
-        <div className="ap__cta-actions">
-          <a href="/signup/role" className="ap__cta-btn ap__cta-btn--primary">GET STARTED →</a>
-          <a href="/#contact"   className="ap__cta-btn ap__cta-btn--secondary">CONTACT US</a>
-        </div>
-      </section>
+      <CTA />
 
       <Footer />
     </div>
