@@ -4,6 +4,7 @@ import Contact from '../components/Contact';
 import FAQ from '../components/Faq';
 import CTA from '../components/Cta';
 import SectionLabel from '../components/Sectionlabel';
+import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
 import './Contactus.css';
 
@@ -131,6 +132,8 @@ export default function ContactUs() {
       </section>
 
       <FAQ />
+
+      <Testimonials />
 
       <section className="cu-news">
         <SectionLabel title="NEWS" number="007" />
