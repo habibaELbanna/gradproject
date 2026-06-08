@@ -8,11 +8,8 @@ const NAV_LINKS = [
   { key: 'nav_home', to: '/' },
   { key: 'nav_about', to: '/about' },
   { key: 'nav_pricing', to: '/pricing' },
-  { key: 'nav_features', to: '/features' },
   { key: 'nav_how', to: '/how-it-works' },
   { key: 'nav_contact', to: '/contact' },
-  { key: 'nav_learn', to: '/learn' },
-  { key: 'nav_tips', to: '/tips' },
 ];
 
 export default function Navbar() {
