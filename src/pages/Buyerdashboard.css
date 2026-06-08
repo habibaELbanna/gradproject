@@ -126,3 +126,19 @@
 [dir="rtl"] .bd__activity-action { margin-left: 0; margin-right: auto; }
 [dir="rtl"] .bd__vendor-actions { flex-direction: row-reverse; }
 [dir="rtl"] .bd__deadline-date { order: 1; }
+/* ---- Rebuild: inline icons + image avatars ---- */
+.bd__kpi-ic { display: inline-flex; color: #555; }
+.bd__kpi-ic svg { width: 20px; height: 20px; }
+.bd__activity-icon { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; }
+.bd__activity-icon svg { width: 18px; height: 18px; }
+.bd__proposal-avatar, .bd__vendor-avatar { overflow: hidden; padding: 0; display: flex; align-items: center; justify-content: center; }
+.bd__avatar-ph { width: 55%; height: 55%; opacity: 0.9; }
+.bd__proposal-avatar img, .bd__vendor-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bd__proposal-rating, .bd__vendor-rating { display: inline-flex; align-items: center; gap: 3px; }
+.bd__star-ic { width: 13px; height: 13px; flex-shrink: 0; }
+.bd__vendor-rating .bd__star-ic { width: 14px; height: 14px; }
+.bd__kpi-trend { display: inline-flex; align-items: center; gap: 4px; }
+.bd__trend-ic { width: 12px; height: 12px; }
+.bd__deadline-arrow { display: inline-flex; color: #555; }
+.bd__chev-ic { width: 16px; height: 16px; }
+[dir="rtl"] .bd__chev-ic { transform: scaleX(-1); }

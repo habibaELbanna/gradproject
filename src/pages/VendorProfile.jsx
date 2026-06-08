@@ -5,6 +5,17 @@ import { supabase } from '../supabaseClient';
 import DashboardLayout from '../components/Dashboardlayout';
 import './VendorProfile.css';
 
+const PHOTOS = [
+  'https://randomuser.me/api/portraits/men/32.jpg',
+  'https://randomuser.me/api/portraits/women/44.jpg',
+  'https://randomuser.me/api/portraits/men/65.jpg',
+  'https://randomuser.me/api/portraits/women/68.jpg',
+  'https://randomuser.me/api/portraits/men/52.jpg',
+  'https://randomuser.me/api/portraits/women/29.jpg',
+];
+const photoFor = (n) => PHOTOS[Math.abs(Number(n) || 0) % PHOTOS.length];
+
+
 const SERVICES = [
   'Commercial Building Construction', 'Residential Construction & Development',
   'Industrial Facilities & Warehouses', 'Renovation & Remodeling',
@@ -87,7 +98,7 @@ export default function VendorProfile() {
         <div className="vp__hero">
           <div className="vp__hero-left">
             <div className="vp__logo">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="1"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+              <img src={photoFor(2)} alt="" />
             </div>
             <div>
               <div className="vp__name-row">
@@ -206,7 +217,7 @@ export default function VendorProfile() {
                 {reviews.map((r, i) => (
                   <div key={i} className="vp__review">
                     <div className="vp__review-top">
-                      <div className="vp__review-avatar">{r.name[0]}</div>
+                      <div className="vp__review-avatar"><img src={photoFor(i)} alt="" /></div>
                       <div className="vp__review-meta">
                         <h4 className="vp__review-name">{r.name}</h4>
                         <p className="vp__review-company">{r.company}</p>
@@ -289,7 +300,7 @@ export default function VendorProfile() {
               {SIMILAR.map((v, i) => (
                 <div key={i} className="vp__similar">
                   <div className="vp__similar-avatar">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="1"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+                    <img src={photoFor(i + 3)} alt="" />
                   </div>
                   <div className="vp__similar-info">
                     <h4 className="vp__similar-name">{v.name}</h4>

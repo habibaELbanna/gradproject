@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import FAQ from '../components/Faq';
 import CTA from '../components/Cta';
 import SectionLabel from '../components/Sectionlabel';
+import Footer from '../components/Footer';
 import '../components/Pricing.css';
 import './Pricingpage.css';
 
@@ -56,10 +56,8 @@ const LinesBg = () => {
         grad.addColorStop(0, 'rgba(255,255,255,0.4)');
         grad.addColorStop(0.3, 'rgba(255,255,255,0.1)');
         grad.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.beginPath(); ctx.arc(x, curveY, node.size * 5, 0, Math.PI * 2);
-        ctx.fillStyle = grad; ctx.fill();
-        ctx.beginPath(); ctx.arc(x, curveY, node.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.fill();
+        ctx.beginPath(); ctx.arc(x, curveY, node.size * 5, 0, Math.PI * 2); ctx.fillStyle = grad; ctx.fill();
+        ctx.beginPath(); ctx.arc(x, curveY, node.size, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.fill();
       });
       animId = requestAnimationFrame(draw);
     }
@@ -69,75 +67,54 @@ const LinesBg = () => {
   return <canvas ref={canvasRef} className="pp-lines-canvas" />;
 };
 
-const NEWS = [
-  { source: 'TECHCRUNCH MIDDLE EAST', title: 'SELA Revolutionizes Egyptian B2B Market', date: 'January 2025' },
-  { source: 'ENTERPRISE TIMES',       title: 'How SELA is Transforming Procurement',  date: 'December 2024' },
-  { source: 'CAIRO BUSINESS MONTHLY',  title: 'The Rise of Digital Procurement Platforms', date: 'November 2024' },
-  { source: 'MENA TECH REVIEW',        title: 'SELA Reaches 1000+ Deals Milestone',  date: 'October 2024' },
-];
-
 const COMPARE = [
-  { f: 'Post needs per month', free: '5', pro: 'Unlimited', ent: 'Unlimited' },
-  { f: 'Browse unlimited',     free: true,  pro: true,  ent: true },
-  { f: 'Basic search',         free: true,  pro: true,  ent: true },
-  { f: 'Email support',        free: true,  pro: true,  ent: true },
-  { f: 'Community access',     free: true,  pro: true,  ent: true },
-  { f: 'Priority matching',    free: false, pro: true,  ent: true },
-  { f: 'Advanced analytics',   free: false, pro: true,  ent: true },
-  { f: '24/7 support',         free: false, pro: true,  ent: true },
-  { f: 'Verified badge',       free: false, pro: true,  ent: true },
-  { f: 'API access',           free: false, pro: true,  ent: true },
-  { f: 'Custom integrations',  free: false, pro: false, ent: true },
-  { f: 'White-label',          free: false, pro: false, ent: true },
-  { f: 'Full API',             free: false, pro: false, ent: true },
-  { f: 'Dedicated manager',    free: false, pro: false, ent: true },
-  { f: 'Training',             free: false, pro: false, ent: true },
+  { f: 'pp_cmp_1',  free: '5',            pro: 'pp_unlimited', ent: 'pp_unlimited' },
+  { f: 'pp_cmp_2',  free: true,  pro: true,  ent: true },
+  { f: 'pp_cmp_3',  free: true,  pro: true,  ent: true },
+  { f: 'pp_cmp_4',  free: true,  pro: true,  ent: true },
+  { f: 'pp_cmp_5',  free: true,  pro: true,  ent: true },
+  { f: 'pp_cmp_6',  free: false, pro: true,  ent: true },
+  { f: 'pp_cmp_7',  free: false, pro: true,  ent: true },
+  { f: 'pp_cmp_8',  free: false, pro: true,  ent: true },
+  { f: 'pp_cmp_9',  free: false, pro: true,  ent: true },
+  { f: 'pp_cmp_10', free: false, pro: true,  ent: true },
+  { f: 'pp_cmp_11', free: false, pro: false, ent: true },
+  { f: 'pp_cmp_12', free: false, pro: false, ent: true },
+  { f: 'pp_cmp_13', free: false, pro: false, ent: true },
+  { f: 'pp_cmp_14', free: false, pro: false, ent: true },
+  { f: 'pp_cmp_15', free: false, pro: false, ent: true },
 ];
 
 const ROADMAP = [
-  { q: 'Q1 2026', items: ['Direct Vendor Invitations', 'Smart Notifications'] },
-  { q: 'Q2 2026', items: ['In-App Video Calls', 'Contract Management'] },
-  { q: 'Q3 2026', items: ['Multi-Currency Support', 'Enterprise SSO Integration'] },
-  { q: 'Q4 2026', items: ['AI Procurement Assistant', 'Mobile App (iOS & Android)'] },
+  { q: 'Q1 2026', items: ['pp_rm_1', 'pp_rm_2'] },
+  { q: 'Q2 2026', items: ['pp_rm_3', 'pp_rm_4'] },
+  { q: 'Q3 2026', items: ['pp_rm_5', 'pp_rm_6'] },
+  { q: 'Q4 2026', items: ['pp_rm_7', 'pp_rm_8'] },
 ];
 
-const Check = () => (
-  <svg className="pp-ic" viewBox="0 0 24 24" fill="none" stroke="#00A7E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 6 9 17l-5-5" />
-  </svg>
-);
+const NEWS = [
+  { source: 'news_1_source', title: 'news_1_title', date: 'news_1_date' },
+  { source: 'news_2_source', title: 'news_2_title', date: 'news_2_date' },
+  { source: 'news_3_source', title: 'news_3_title', date: 'news_3_date' },
+  { source: 'news_4_source', title: 'news_4_title', date: 'news_4_date' },
+];
 
-const Cross = () => (
-  <svg className="pp-ic" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 6 6 18M6 6l12 12" />
-  </svg>
-);
+const Check = () => (<svg className="pp-ic" viewBox="0 0 24 24" fill="none" stroke="#00A7E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>);
+const Cross = () => (<svg className="pp-ic" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12" /></svg>);
 
-const Cell = ({ v }) => {
+const Cell = ({ v, t }) => {
   if (v === true) return <Check />;
   if (v === false) return <Cross />;
-  return <span className="pp-table__val">{v}</span>;
+  return <span className="pp-table__val">{t(v)}</span>;
 };
 
 export default function PricingPage() {
   const { t, i18n } = useTranslation();
 
   const PLANS = [
-    {
-      badge: t('plan_starter'), name: t('plan_free'), price: t('plan_free_price'), period: t('plan_month'),
-      desc: t('plan_free_desc'), highlight: false, cta: t('plan_free_cta'), href: '/signup',
-      features: [t('plan_f1'), t('plan_f2'), t('plan_f3'), t('plan_f4'), t('plan_f5')],
-    },
-    {
-      badge: t('plan_pro_badge'), name: t('plan_pro'), price: t('plan_pro_price'), period: t('plan_month'),
-      desc: t('plan_pro_desc'), highlight: true, cta: t('plan_pro_cta'), href: '/signup',
-      features: [t('plan_p1'), t('plan_p2'), t('plan_p3'), t('plan_p4'), t('plan_p5'), t('plan_p6')],
-    },
-    {
-      badge: t('plan_ent_badge'), name: t('plan_ent'), price: t('plan_ent_price'), period: '',
-      desc: t('plan_ent_desc'), highlight: false, cta: t('plan_ent_cta'), href: '/contact',
-      features: [t('plan_e1'), t('plan_e2'), t('plan_e3'), t('plan_e4'), t('plan_e5')],
-    },
+    { badge: t('plan_starter'), name: t('plan_free'), price: t('plan_free_price'), period: t('plan_month'), desc: t('plan_free_desc'), highlight: false, cta: t('plan_free_cta'), href: '/signup', features: [t('plan_f1'), t('plan_f2'), t('plan_f3'), t('plan_f4'), t('plan_f5')] },
+    { badge: t('plan_pro_badge'), name: t('plan_pro'), price: t('plan_pro_price'), period: t('plan_month'), desc: t('plan_pro_desc'), highlight: true, cta: t('plan_pro_cta'), href: '/signup', features: [t('plan_p1'), t('plan_p2'), t('plan_p3'), t('plan_p4'), t('plan_p5'), t('plan_p6')] },
+    { badge: t('plan_ent_badge'), name: t('plan_ent'), price: t('plan_ent_price'), period: '', desc: t('plan_ent_desc'), highlight: false, cta: t('plan_ent_cta'), href: '/contact', features: [t('plan_e1'), t('plan_e2'), t('plan_e3'), t('plan_e4'), t('plan_e5')] },
   ];
 
   return (
@@ -146,8 +123,8 @@ export default function PricingPage() {
 
       <section className="pp-hero">
         <span className="pp-hero__watermark" aria-hidden="true">PRICING</span>
-        <h1 className="pp-hero__title">TRANSFORM YOUR PROCUREMENT.</h1>
-        <p className="pp-hero__sub">Smart Matching, Verified Vendors, Secure Payments, Advanced Analytics, Priority Support — All In One Powerful Platform.</p>
+        <h1 className="pp-hero__title">{t('pp_hero_title')}</h1>
+        <p className="pp-hero__sub">{t('pp_hero_sub')}</p>
       </section>
 
       <section className="pp-plans">
@@ -162,9 +139,7 @@ export default function PricingPage() {
               </div>
               <p className="pricing__desc">{plan.desc}</p>
               <ul className="pricing__features">
-                {plan.features.map((f, fi) => (
-                  <li key={fi} className="pricing__feature"><span className="pricing__feature-dot" />{f}</li>
-                ))}
+                {plan.features.map((f, fi) => (<li key={fi} className="pricing__feature"><span className="pricing__feature-dot" />{f}</li>))}
               </ul>
               <a href={plan.href} className={`pricing__cta ${plan.highlight ? 'pricing__cta--highlight' : ''}`}>{plan.cta}</a>
             </div>
@@ -173,30 +148,28 @@ export default function PricingPage() {
       </section>
 
       <section className="pp-compare">
-        <h2 className="pp-heading">FEATURE COMPARISON</h2>
+        <h2 className="pp-heading">{t('pp_compare_heading')}</h2>
         <div className="pp-table">
           <div className="pp-table__row pp-table__row--head">
-            <span className="pp-table__feat">Features</span>
-            <span>Free</span>
-            <span className="pp-table__pro">Professional</span>
-            <span>Enterprise</span>
+            <span className="pp-table__feat">{t('pp_col_features')}</span>
+            <span>{t('pp_col_free')}</span>
+            <span className="pp-table__pro">{t('pp_col_pro')}</span>
+            <span>{t('pp_col_ent')}</span>
           </div>
           {COMPARE.map((r, i) => (
             <div key={i} className="pp-table__row">
-              <span className="pp-table__feat">{r.f}</span>
-              <span><Cell v={r.free} /></span>
-              <span><Cell v={r.pro} /></span>
-              <span><Cell v={r.ent} /></span>
+              <span className="pp-table__feat">{t(r.f)}</span>
+              <span><Cell v={r.free} t={t} /></span>
+              <span><Cell v={r.pro} t={t} /></span>
+              <span><Cell v={r.ent} t={t} /></span>
             </div>
           ))}
         </div>
       </section>
 
       <section className="pp-roadmap">
-        <div className="pp-roadmap__lines">
-          <LinesBg />
-        </div>
-        <h2 className="pp-heading">PRODUCT ROADMAP</h2>
+        <div className="pp-roadmap__lines"><LinesBg /></div>
+        <h2 className="pp-heading">{t('pp_roadmap_heading')}</h2>
         <div className="pp-roadmap-grid">
           {ROADMAP.map((q, i) => (
             <div key={i} className="pp-rm-card">
@@ -204,11 +177,8 @@ export default function PricingPage() {
               <ul className="pp-rm-list">
                 {q.items.map((it, j) => (
                   <li key={j} className="pp-rm-item">
-                    <svg className="pp-rm-check" viewBox="0 0 24 24" fill="none" stroke="#00A7E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="9" />
-                      <path d="m9 12 2 2 4-4" />
-                    </svg>
-                    {it}
+                    <svg className="pp-rm-check" viewBox="0 0 24 24" fill="none" stroke="#00A7E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="m9 12 2 2 4-4" /></svg>
+                    {t(it)}
                   </li>
                 ))}
               </ul>
@@ -220,21 +190,20 @@ export default function PricingPage() {
       <FAQ />
 
       <section className="pp-news">
-        <SectionLabel title="NEWS" number="007" />
+        <SectionLabel title={t('news_label')} number="007" />
         <div className="pp-news-grid">
           {NEWS.map((n, i) => (
             <div key={i} className="pp-news-card">
-              <span className="pp-news-source">{n.source}</span>
-              <h3 className="pp-news-title">{n.title}</h3>
-              <span className="pp-news-date">{n.date}</span>
-              <a href="#" className="pp-news-link" onClick={(e) => e.preventDefault()}>READ ARTICLE →</a>
+              <span className="pp-news-source">{t(n.source)}</span>
+              <h3 className="pp-news-title">{t(n.title)}</h3>
+              <span className="pp-news-date">{t(n.date)}</span>
+              <a href="#" className="pp-news-link" onClick={(e) => e.preventDefault()}>{t('read_article')}</a>
             </div>
           ))}
         </div>
       </section>
 
       <CTA />
-
       <Footer />
     </div>
   );

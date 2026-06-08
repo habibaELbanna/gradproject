@@ -1,0 +1,40 @@
+:root { --pn-accent: #00A7E5; }
+.pn { max-width: 880px; margin: 0 auto; padding: 8px 0 40px; }
+.pn__head { margin-bottom: 28px; }
+.pn__title { font-family: Helvetica, Arial, sans-serif; font-size: 28px; font-weight: 900; color: #fff; margin: 0 0 6px; }
+.pn__subtitle { font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #9CA3AF; margin: 0; }
+
+.pn__alert { padding: 12px 16px; margin-bottom: 18px; font-size: 14px; font-family: Helvetica, Arial, sans-serif; border: 1px solid; }
+.pn__alert--error { background: rgba(255,68,68,0.08); border-color: #ff4444; color: #ff7b7b; }
+.pn__alert--success { background: rgba(0,167,229,0.08); border-color: var(--pn-accent); color: var(--pn-accent); }
+
+.pn__card { background: #141414; border: 1px solid #242424; border-radius: 14px; padding: 28px; }
+.pn__row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.pn__field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.pn__label { font-family: Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; color: #cfcfcf; }
+
+.pn__input {
+  background: #0e0e0e; border: 1px solid #2a2a2a; color: #fff;
+  font-family: Helvetica, Arial, sans-serif; font-size: 14px; padding: 11px 13px;
+  border-radius: 0; outline: none; width: 100%; box-sizing: border-box; transition: border-color 0.15s ease;
+}
+.pn__input::placeholder { color: #5a5a5a; }
+.pn__input:focus { border-color: var(--pn-accent); }
+.pn__textarea { resize: vertical; min-height: 96px; line-height: 1.6; }
+.pn__select { appearance: none; cursor: pointer; }
+
+.pn__budget { display: flex; align-items: center; gap: 12px; }
+.pn__budget-sep { color: #5a5a5a; }
+
+.pn__actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; }
+.pn__btn-primary, .pn__btn-secondary {
+  font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700;
+  padding: 11px 26px; border-radius: 0; cursor: pointer; border: 1px solid; transition: opacity 0.15s ease;
+}
+.pn__btn-primary { background: var(--pn-accent); color: #04222f; border-color: var(--pn-accent); }
+.pn__btn-secondary { background: transparent; color: #cfcfcf; border-color: #2a2a2a; }
+.pn__btn-primary:disabled, .pn__btn-secondary:disabled { opacity: 0.55; cursor: default; }
+
+@media (max-width: 680px) {
+  .pn__row { grid-template-columns: 1fr; gap: 0; }
+}

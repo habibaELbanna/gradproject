@@ -4,6 +4,17 @@ import { useTranslation } from 'react-i18next';
 import { supabase } from '../supabaseClient';
 import './Messages.css';
 
+const PHOTOS = [
+  'https://randomuser.me/api/portraits/men/32.jpg',
+  'https://randomuser.me/api/portraits/women/44.jpg',
+  'https://randomuser.me/api/portraits/men/65.jpg',
+  'https://randomuser.me/api/portraits/women/68.jpg',
+  'https://randomuser.me/api/portraits/men/52.jpg',
+  'https://randomuser.me/api/portraits/women/29.jpg',
+];
+const photoFor = (n) => PHOTOS[Math.abs(Number(n) || 0) % PHOTOS.length];
+
+
 const STATIC_CONVOS = [
   { id: 1, name: 'Sarah Chen', company: 'TechCorp', initials: 'SC', lastMsg: 'Thanks for the proposal. Can we discuss the boxes...', time: '2h ago', starred: true, unread: true },
   { id: 2, name: 'John Smith', company: 'BuildCo', initials: 'JS', lastMsg: 'Can we set up a meeting to discuss specs in...', time: 'Yesterday', starred: false, unread: false },
@@ -109,7 +120,7 @@ export default function Messages() {
             {filtered.map(c => (
               <div key={c.id} className={`msg__convo ${activeConvo?.id === c.id ? 'msg__convo--active' : ''}`}
                 onClick={() => setActiveConvo(c)}>
-                <div className="msg__convo-avatar">{c.initials}</div>
+                <div className="msg__convo-avatar"><img src={photoFor(c.id)} alt="" /></div>
                 <div className="msg__convo-body">
                   <div className="msg__convo-top">
                     <span className="msg__convo-name">{c.name} · {c.company}</span>
@@ -129,7 +140,7 @@ export default function Messages() {
             <>
               <div className="msg__chat-header">
                 <div className="msg__chat-header-left">
-                  <div className="msg__chat-avatar">{activeConvo.initials}</div>
+                  <div className="msg__chat-avatar"><img src={photoFor(activeConvo.id)} alt="" /></div>
                   <div>
                     <h3 className="msg__chat-name">{activeConvo.name} · {activeConvo.company}</h3>
                     <p className="msg__chat-role">Procurement Professional</p>
@@ -149,7 +160,7 @@ export default function Messages() {
 
                 {messages.map((m, i) => (
                   <div key={i} className={`msg__message ${m.isMe ? 'msg__message--me' : ''}`}>
-                    {!m.isMe && <div className="msg__msg-avatar">{m.initials}</div>}
+                    {!m.isMe && <div className="msg__msg-avatar"><img src={photoFor(activeConvo.id)} alt="" /></div>}
                     <div className="msg__msg-body">
                       <div className="msg__msg-meta">
                         <span className="msg__msg-sender">{m.sender}</span>
@@ -212,7 +223,7 @@ export default function Messages() {
           {activeConvo && (
             <>
               <div className="msg__panel-profile">
-                <div className="msg__panel-avatar">{activeConvo.initials}</div>
+                <div className="msg__panel-avatar"><img src={photoFor(activeConvo.id)} alt="" /></div>
                 <h3 className="msg__panel-name">{activeConvo.name}</h3>
                 <p className="msg__panel-role">Procurement Professional</p>
                 <p className="msg__panel-company">{activeConvo.company}</p>

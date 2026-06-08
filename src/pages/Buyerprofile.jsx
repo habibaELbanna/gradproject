@@ -5,6 +5,17 @@ import { supabase } from '../supabaseClient';
 import DashboardLayout from '../components/Dashboardlayout';
 import './Buyerprofile.css';
 
+const PHOTOS = [
+  'https://randomuser.me/api/portraits/men/32.jpg',
+  'https://randomuser.me/api/portraits/women/44.jpg',
+  'https://randomuser.me/api/portraits/men/65.jpg',
+  'https://randomuser.me/api/portraits/women/68.jpg',
+  'https://randomuser.me/api/portraits/men/52.jpg',
+  'https://randomuser.me/api/portraits/women/29.jpg',
+];
+const photoFor = (n) => PHOTOS[Math.abs(Number(n) || 0) % PHOTOS.length];
+
+
 const SAVED_VENDORS = [
   { name: 'BuildRight Construction', category: 'Construction & Building', rating: 4.8, reviews: 245, saved: '1 week ago' },
   { name: 'Elite Builders', category: 'Construction & Renovation', rating: 4.7, reviews: 203, saved: '2 weeks ago' },
@@ -85,7 +96,7 @@ export default function BuyerProfile() {
           <div className="bp__hero-left">
             <div className="bp__avatar-wrap">
               <div className="bp__avatar">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="1"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <img src={photoFor(0)} alt="" />
               </div>
               <button className="bp__avatar-upload">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -325,7 +336,7 @@ export default function BuyerProfile() {
               <div key={i} className="bp__saved-card">
                 <div className="bp__saved-top">
                   <div className="bp__saved-avatar">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="1"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+                    <img src={photoFor(i + 1)} alt="" />
                   </div>
                   <div>
                     <h4 className="bp__saved-name">{v.name}</h4>

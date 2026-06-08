@@ -19,6 +19,7 @@ export default function Navbar() {
 
   const toggleLang = () => {
     const next = i18n.language === 'en' ? 'ar' : 'en';
+    localStorage.setItem('sela_lang', next);
     i18n.changeLanguage(next);
     document.documentElement.dir = next === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = next;
