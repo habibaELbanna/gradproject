@@ -38,6 +38,17 @@ const FEATURED = [
   { name: 'IT Services', desc: 'Software and IT solutions', needs: 298, vendors: 312, avgResponse: '3.2 hrs', slug: 'software' },
   { name: 'Furniture', desc: 'Office and commercial furniture', needs: 127, vendors: 94, avgResponse: '5.6 hrs', slug: 'furniture' },
 ];
+const FBANNER = {
+  'Office Supplies': { g: 'linear-gradient(135deg,#0091c7,#04324a)', i: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> },
+  'Electronics': { g: 'linear-gradient(135deg,#1f6f8b,#0c2738)', i: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> },
+  'Construction Materials': { g: 'linear-gradient(135deg,#b06a2a,#4a2c10)', i: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M3 21h18M5 21V8l7-4 7 4v13"/><path d="M9 21v-6h6v6"/></svg> },
+  'Food & Beverage': { g: 'linear-gradient(135deg,#0a7d6c,#06463d)', i: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M4 3v7a2 2 0 0 0 4 0V3M6 11v10M14 3c-1.5 0-3 2-3 5s1.5 4 3 4 3-1 3-4-1.5-5-3-5z"/><path d="M17 12v9"/></svg> },
+  'Marketing Services': { g: 'linear-gradient(135deg,#5a468c,#2f2858)', i: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg> },
+  'Professional Services': { g: 'linear-gradient(135deg,#2a3950,#141c28)', i: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> },
+  'IT Services': { g: 'linear-gradient(135deg,#0091c7,#04324a)', i: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> },
+  'Furniture': { g: 'linear-gradient(135deg,#7a5a2a,#3a2c14)', i: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M4 18v-6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6"/><path d="M4 14h16M6 18v2M18 18v2"/></svg> },
+};
+const FB_DEFAULT = { g: 'linear-gradient(135deg,#2a3950,#141c28)', i: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/></svg> };
 
 const CAT_ICONS = {
   'Agriculture & Farming': <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00A7E5" strokeWidth="1.5"><path d="M12 22V12"/><path d="M12 12C12 7 7 4 2 6"/><path d="M12 12C12 7 17 4 22 6"/></svg>,
@@ -120,7 +131,8 @@ export default function BrowseCategories() {
           <div className="bc__featured-grid">
             {FEATURED.map((cat, i) => (
               <div key={i} className="bc__featured-card" onClick={() => navigate('/browse/vendors')}>
-                <div className="bc__featured-img">
+                <div className="bc__featured-img" style={{ background: (FBANNER[cat.name] || FB_DEFAULT).g }}>
+                  <span className="bc__featured-icon">{(FBANNER[cat.name] || FB_DEFAULT).i}</span>
                   <div className="bc__featured-overlay" />
                 </div>
                 <div className="bc__featured-body">
