@@ -65,3 +65,14 @@ img, svg {
 ::-webkit-scrollbar-track { background: #0e0e0e; }
 ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 0; }
 ::-webkit-scrollbar-thumb:hover { background: #00A7E5; }
+
+/* SELA appearance preferences (Settings > Appearance) */
+[data-reduce-motion="true"] *,
+[data-reduce-motion="true"] *::before,
+[data-reduce-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+[data-density="compact"] body { font-size: 94%; }

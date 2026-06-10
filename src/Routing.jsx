@@ -19,6 +19,8 @@ import PricingPage from './pages/Pricingpage';
 import ContactUs from './pages/Contactus';
 import HowItWorksPage from './pages/Howitworkspage';
 import PostNeed from './pages/PostNeed';
+import BrowseVendors from './pages/BrowseVendors';
+import Settings from './pages/Settings';
 
 const Routing = () => {
   return (
@@ -44,6 +46,8 @@ const Routing = () => {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
         <Route path="/post-need" element={<PostNeed />} />
+        <Route path="/browse/vendors" element={<BrowseVendors />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
   );
